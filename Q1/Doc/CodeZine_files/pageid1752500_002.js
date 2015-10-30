@@ -1,0 +1,3 @@
+document.writeln("<a target=\"_blank\" A HREF=\"http://as.se.impact-ad.jp/ADCLICK/CID=00002a914ff06c6800000000/acc_random=4327878/SITE=CZ/AREA=HEAD.SUPER/AAMSZ=728X90/OENCJP=UTF8/pageid=1752500\" scvars=\"14\" scevents=\"5\" sccategory=\"Ad\" scproducts=\"a_StaticImage\" sclabel=\"a_StaticImage Click\" scvals=\"http://as.se.impact-ad.jp/ADCLICK/CID=00002a914ff06c6800000000/acc_random=4327878/SITE=CZ/AREA=HEAD.SUPER/AAMSZ=728X90/OENCJP=UTF8/pageid=1752500\" ref=\"sc\">");
+document.writeln("<IMG SRC=\"http://img.ak.impact-ad.jp/se/2015/10/test_728-fc67584343f78cc975075e1a8312daf0c6af0f81.png\" ALT=\"\" BORDER=\"0\"></A>");
+document.close();

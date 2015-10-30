@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="ja" lang="ja"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>第6回　ハサミを使うタイミング～どうやって端を見つけるの？─結城浩からの問題：エンジニアのスキルを試すコードパズル ─この問題，あなたは解けますか？｜gihyo.jp … 技術評論社</title>
+<meta name="description" content="あなたの「コード力」を試すコードパズル，結城浩氏からの挑戦です。">
+<meta name="keywords" content="技術評論社,gihyo.jp,アルゴリズム,数学,図形">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@gihyojp">
+<meta property="og:title" content="第6回　ハサミを使うタイミング～どうやって端を見つけるの？─結城浩からの問題：エンジニアのスキルを試すコードパズル ─この問題，あなたは解けますか？">
+<meta property="og:type" content="article">
+<meta property="og:description" content="あなたの「コード力」を試すコードパズル，結城浩氏からの挑戦です。">
+<meta property="og:url" content="http://gihyo.jp/dev/serial/01/codeiq/0006">
+<meta property="og:image" content="http://image.gihyo.co.jp/assets/images/ICON/2012/thumb/TH300_1041_codeiq.png">
+<meta property="og:site_name" content="gihyo.jp">
+<meta property="fb:app_id" content="185201618169441">
+
+<!-- base href="http://gihyo.jp/" -->
+<link rel="canonical" href="http://gihyo.jp/dev/serial/01/codeiq/0006">
+<link rel="publisher" href="https://plus.google.com/113010907831932672815">
+<link rel="alternate" type="application/rss+xml" title="gihyo.jp：DEVELOPER STAGE RSS1.0" href="http://gihyo.jp/dev/feed/rss1">
+<link rel="alternate" type="application/rss+xml" title="gihyo.jp：DEVELOPER STAGE RSS2.0" href="http://gihyo.jp/dev/feed/rss2">
+<link rel="alternate" type="application/atom+xml" title="gihyo.jp：DEVELOPER STAGE Atom" href="http://gihyo.jp/dev/feed/atom">
+<!--[if lt IE 9]>
+<script src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+<![endif]-->
+<style>*{font-size:100%;list-style:none;margin:0;padding:0}body{color:#333;font-family:'ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,sans-serif;font-size:12px;line-height:1.4;text-align:center;-webkit-text-autospace:ideograph-numeric ideograph-alpha;-moz-text-autospace:ideograph-numeric ideograph-alpha;-ms-text-autospace:ideograph-numeric ideograph-alpha;text-autospace:ideograph-numeric ideograph-alpha}a{color:#05C;text-decoration:none;word-wrap:break-word}a:visited{color:#3388cc}.clearfix{display:block}.clearfix:after{clear:both;content:"";display:block;height:0}img{border:none;vertical-align:top;-ms-interpolation-mode:bicubic}#wrapper{position:relative;width:985px;margin:0 auto;text-align:left}#header{position:relative;-webkit-text-size-adjust:100%;-ms-interpolation-mode:bicubic}#header:after{clear:both;content:'';display:block;height:0}#header #logo{padding:22px 0}#header #logo a{display:inline-block}#header .utility{border-top:3px solid #0068B7;position:absolute;right:0;top:0}#header ul{display:block;float:left;left:0px;padding-top:22px;top:0px}#header ul li{border-collapse:separate;display:block;float:left;height:21px;width:auto}#header ul li a{display:block;-webkit-font-feature-settings:'kern','liga','pwid';-moz-font-feature-settings:'kern','liga','pwid';font-feature-settings:'kern','liga','pwid';height:21px;text-rendering:optimizelegibility}#header #shortcut li a{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAKCAMAAACg0N8BAAAAS1BMVEX///8TkxwZniPw+PEaoSRGtE7x+fGY0ZxuwHRtv3O13bjU7dY+pEUnpDASkRsYnCEXmiAUlh4opjIwnziLzZDS6tSo2qwimioVmB/5voWQAAAAAXRSTlMAQObYZgAAADRJREFUeF4VxcUBwDAQxECZIczpv1LfzkNiDsh6PZpzXwcOU+CXxi6Vzdzg/fIC8ZwwKasDUJQCMERw8roAAAAASUVORK5CYII=) no-repeat 15px center;background-size:auto 5px;color:#333;display:block;font-size:11px;font-weight:bold;line-height:21px;padding:0 15px 0 22px;white-space:nowrap;width:auto}#header #searchForm{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAYCAMAAAAmopZHAAABelBMVEX///+ZmZm/v7/////y8vLl5eXv7+/m5ua2trampqafn5/5+fnS0tKsrKwzfcmzs7Pf39/s7Oy5ubkqcbo5hdP39/fz+P0ud8E0fsuPvu4jaK9llMQ8idjn5+fP4/fP4vaNvOzGxsbH2OlsqOUnbrZ9s+pCkeLZ2dlan+bn8fs5htQxe8bJycn6+vqenp6Nve07iNeKu+309PSCqNDx9flGkuBQktU8h9Nbj8RnpOFIkdsveMO7u7s7htJPkdRno+E4g9F8seg+i9s5hdKwy+ZajsMsdb4karH8/PyCqdDExMTk7fYzfso3gs8xesVHkNv9/f3x9vo2gc3KysrL3vHc3Nw6fsM4hNGgv9/o6OhMld/Nzc1mpugqcrtGkuFKk94+i9oyfcigv95KlN/t7e1ZjcI8itna6PcyfMhbkMVJk97MzMw7h9ZIkt26uro7iNYsdL1+s+ptqeabxfC/1u0tdb/w8PAsdL58suiwy+c2gc45fMHa6fdtqedp8vz/AAAAAXRSTlMAQObYZgAAAVBJREFUeF5tkGVvK0EMRccDyxBmZigzMzMz9zEzv//e6U7SpGrOJ+tcy7oycijawFHTFDXDVKjztkkXubANWXZhjQ+NbQBNJuVE8h/RPQC47lXQ3IHuwsVJ18A3ggFcD1fkwFkpnPo1PPjqt66CKbwNNukufe3MZ0d8oYNVvvbM8QBGuRDu/Pz/8oUv9P1IBziteTnRn8p/uZ3pOrQWXhMTcHvNJ99PZ99cxSp/qufzxAbcI7zr5bvJzdjHyroVzC0TDTAVNTGZGPfNTu1Yo95Ixg1gOD4NGt2rWmvXG0HvYpR4oIM5ngIvOvf35ydvLhLt4zUx8zuFdvmob98MPe/NEK5BiW85fkkBUIs6IUT2wD1jSEAV4Jg2CBqvcxumEB1YaQ62JLbfhvGKwRh7FCD/MXOI/5BEgOq091BK/byJCCT0BOkDQBtDLQLGQa0DegfVNig5kouP/AAAAABJRU5ErkJggg==) no-repeat 0 26px;background-size:auto 12px;display:block;float:left;height:20px;margin-left:15px;padding-top:20px;padding-left:15px;width:auto}#header #searchForm #searchFormKeyword{background:#FFF;border:1px solid #CCC;border-radius:2px;-moz-box-sizing:border-box;box-sizing:border-box;font-size:12px;height:24px;line-height:2;margin-right:4px;padding:0 0.5em;position:relative;width:267px}.submitButton{background:#33A61D;border:1px solid #098a13;border-radius:2px;-moz-box-sizing:border-box;box-sizing:border-box;color:#FFF;cursor:pointer;display:block;float:right;font-weight:bold;line-height:2;padding:0 0.8em;text-align:center;text-shadow:0 0 2px #098a13;-webkit-appearance:none}#header #searchForm #searchFormSubmit{font-size:11px}#header #headerBanner01,#header #headerBanner02{margin-bottom:15px}#header #headerBanner01{float:left}#header #headerBanner02{float:right}.headCategoryNavigation{display:block;line-height:1;margin-bottom:4px;-ms-interpolation-mode:bicubic;position:relative;-webkit-text-size-adjust:100%;width:100%}.headCategoryNavigation .main{background:#0068B7;display:block;width:100%}.headCategoryNavigation .main li{float:left;display:block;height:34px;margin-top:4px;width:auto}.headCategoryNavigation .main li:first-child{margin-left:5px}.headCategoryNavigation .main .change{float:right}.headCategoryNavigation .main li a{color:#FBFBFF;display:block;-webkit-font-feature-settings:"kern", "liga", "pwid";-moz-font-feature-settings:"kern", "liga", "pwid";font-feature-settings:"kern", "liga", "pwid";font-size:12px;font-weight:bold;height:34px;line-height:30px;padding:0 20px;text-align:center;text-rendering:optimizelegibility;text-shadow:0 0 2px #144b83;width:auto}.headCategoryNavigation .main .change a{font-weight:normal;padding-left:0}.headCategoryNavigation .main .change a:before{content:'▶ ';font-size:0.5em;vertical-align:middle}#topicPath{-webkit-font-feature-settings:"kern", "liga", "palt";-moz-font-feature-settings:"kern", "liga", "palt";font-feature-settings:"kern", "liga", "palt";line-height:1;overflow:hidden;padding:0 10px 15px 10px;position:relative;text-overflow:ellipsis;text-rendering:optimizelegibility;vertical-align:bottom;white-space:pre}#main{float:left;width:818px}#main #primary{float:left;font-size:117%;width:505px}#main #secondary{float:right;width:302px}#sub{float:right;width:157px}.readingContent01 p{margin:0 0 1em 0;line-height:1.9}</style>
+
+
+<!--[if lt IE 9]>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script async="" src="gihyo.jp_files/cbgapi.loaded_1"></script><script async="" src="gihyo.jp_files/cbgapi.loaded_0"></script><script src="gihyo.jp_files/analytics.js" async=""></script><script src="gihyo.jp_files/smoothscroll-min.js" async="" type="text/javascript"></script><script src="gihyo.jp_files/jquery.js" async="" type="text/javascript"></script><script src="gihyo.jp_files/gpt.js" type="text/javascript" async=""></script><script src="gihyo.jp_files/jquery_003.js"></script>
+<!--<![endif]-->
+<script type="text/javascript">
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/33530947/dev-bigbanner', [728,90], 'div-gpt-ad-1369887592403-0').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-centertextlink1', [300,16], 'div-gpt-ad-1369887592403-2').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-centertextlink2', [300,16], 'div-gpt-ad-1369887592403-3').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-rectangle1', [300,300], 'div-gpt-ad-1369887592403-4').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-rectangle2', [300,300], 'div-gpt-ad-1369887592403-5').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-mainregularbanner', [468,60], 'div-gpt-ad-1369887592403-7').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-textlink1', [485,16], 'div-gpt-ad-1369887592403-8').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-textlink2', [485,16], 'div-gpt-ad-1369887592403-9').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-articlerectangle', [336,280], 'div-gpt-ad-1369887592403-10').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-delimiterregularbanner', [468,60], 'div-gpt-ad-1369887592403-11').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-delimiterrectangle', [300,300], 'div-gpt-ad-1369887592403-12').addService(googletag.pubads());
+googletag.defineSlot('/33530947/dev-minibanner', [243,90], 'div-gpt-ad-1369887592403-13').addService(googletag.pubads());
+
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script><link href="gihyo.jp_files/setAll1013.css" media="all" type="text/css" rel="stylesheet"><script async="" src="gihyo.jp_files/pubads_impl_74.js"></script><script src="gihyo.jp_files/button.js" async="" charset="utf-8" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow-x:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, "hiragino kaku gothic pro",meiryo,"ms pgothic",sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+
+<body printedit-previous="16.1" itemscope="" itemtype="http://schema.org/WebPage"><iframe src="gihyo.jp_files/hub.htm" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrameSecure" tabindex="0" scrolling="no" allowtransparency="true" id="twttrHubFrameSecure" frameborder="0"></iframe><iframe src="gihyo.jp_files/hub_002.htm" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrame" tabindex="0" scrolling="no" allowtransparency="true" id="twttrHubFrame" frameborder="0"></iframe>
+<div id="wrapper">
+
+<header role="banner">
+<div id="header" itemscope="" itemtype="http://schema.org/WPHeader">
+
+<h1 id="logo"><a href="http://gihyo.jp/"><img src="gihyo.jp_files/gihyojp_logo.png" alt="gihyo.jp" height="27" width="141"></a></h1>
+
+<div class="utility">
+
+<ul id="shortcut">
+
+<li class="num02"><a href="http://gihyo.jp/site/inquiry">お問い合わせ</a></li>
+<li class="num03"><a href="http://gihyo.jp/site/profile">会社案内</a></li>
+</ul>
+
+<div id="searchForm">
+<form action="/result"><input readonly="readonly" id="searchFormKeyword" name="query" value="検索したい用語を入力" type="text"><input readonly="readonly" id="searchFormSubmit" class="submitButton" value="検索" type="submit"></form>
+</div>
+
+</div>
+
+<div id="headerBanner01"><div id="div-gpt-ad-1369887592403-0" style="width:728px; height:90px; margin:0 auto">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1369887592403-0'); });
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/33530947/dev-bigbanner_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-bigbanner_0" id="google_ads_iframe_/33530947/dev-bigbanner_0" frameborder="0" height="90" width="728"></iframe></div><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-bigbanner_0__hidden__" id="google_ads_iframe_/33530947/dev-bigbanner_0__hidden__" frameborder="0" height="0" width="0"></iframe></div>
+</div>
+<div id="headerBanner02"><div id="div-gpt-ad-1369887592403-13" style="width:243px; height:90px; margin:0 auto">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1369887592403-13'); });
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/33530947/dev-minibanner_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-minibanner_0" id="google_ads_iframe_/33530947/dev-minibanner_0" frameborder="0" height="90" width="243"></iframe></div></div>
+</div>
+</div>
+
+
+
+<div id="categoryNavigation" class="headCategoryNavigation">
+<ul class="main clearfix">
+<li class="current"><a href="http://gihyo.jp/dev" title="DEVELOPER STAGE">デベロッパ</a></li>
+<li><a href="http://gihyo.jp/admin" title="ADMINISTRATOR STAGE">アドミニストレータ</a></li>
+<li><a href="http://gihyo.jp/design" title="WEB+DESIGN STAGE">WEB＋デザイン</a></li>
+<li><a href="http://gihyo.jp/lifestyle" title="LIFESTYLE STAGE">ライフスタイル</a></li>
+<li class="change"><a href="http://gihyo.jp/book" title="書籍案内">書籍案内</a></li>
+<li class="change"><a href="https://gihyo.jp/dp" title="Gihyo Digital Publishing">電子書籍</a></li>
+<li class="change"><a href="https://gihyo.jp/sozai" title="技術評論社素材">素材販売</a></li></ul>
+</div>
+
+<div id="topicPath" itemprop="breadcrumb">
+<span class="B_crumbBox"><span class="B_firstCrumb"><a href="http://gihyo.jp/" class="B_homeCrumb" title="トップページ">gihyo.jp</a></span> » <a href="http://gihyo.jp/dev" class="B_crumb" title="DEVELOPER STAGE">DEVELOPER STAGE</a> » <a href="http://gihyo.jp/dev/serial" class="B_crumb" title="連載">連載</a> » <a href="http://gihyo.jp/dev/serial/01/codeiq" class="B_crumb" title="エンジニアのスキルを試すコードパズル ─この問題，あなたは解けますか？">エンジニアのスキルを試すコードパズル ─この問題，あなたは解けますか？</a> » <span class="B_currentCrumb">第6回　ハサミを使うタイミング～どうやって端を見つけるの？─結城浩からの問題</span></span>
+</div>
+</header>
+<div id="content" class="clearfix">
+<div id="main">
+<article role="main">
+<div id="primary" itemscope="" itemtype="http://schema.org/Article">
+
+
+<h1 class="mainTitle01"><a href="http://gihyo.jp/dev/serial/01/codeiq">エンジニアのスキルを試すコードパズル ─この問題，あなたは解けますか？</a></h1>
+<h2 class="subTitle01" itemprop="name">第6回　ハサミを使うタイミング～どうやって端を見つけるの？─結城浩からの問題</h2>
+
+<div id="article" class="sectionBlock01 main">
+
+<div class="sectionInfo01">
+<div class="sectionProperty">
+<div id="socialBookmark" class="clearfix">
+
+<ul id="socialBookmarkList">
+<li class="twitter"><iframe data-url="http://bit.ly/10B6KaK" src="gihyo.jp_files/tweet_button.htm" title="Twitter Tweet Button" style="position: static; visibility: visible; width: 90px; height: 20px;" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe></li>
+<li class="google"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px;"><iframe title="+1" data-gapiattached="true" src="gihyo.jp_files/fastbutton.htm" name="I0_1446187859909" id="I0_1446187859909" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div></li>
+<li class="hatena"><iframe style="width: 50px; height: 20px;" src="javascript:false" scrolling="no" title="このエントリーをはてなブックマークに追加" class="hatena-bookmark-button-frame" frameborder="0" height="20" width="50"></iframe></li>
+<li class="facebook"><div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="gihyo.jp_files/wjDNIDNrTQG.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="gihyo.jp_files/wjDNIDNrTQG_002.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><fb:like fb-iframe-plugin-query="app_id=185201618169441&amp;container_width=0&amp;href=http%3A%2F%2Fgihyo.jp%2Fdev%2Fserial%2F01%2Fcodeiq%2F0006&amp;layout=button_count&amp;locale=ja_JP&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=100" fb-xfbml-state="rendered" class=" fb_iframe_widget" href="http://gihyo.jp/dev/serial/01/codeiq/0006" send="false" layout="button_count" width="100" show_faces="false" font="" style="margin-left:10px;"><span style="vertical-align: bottom; width: 98px; height: 20px;"><iframe class="" src="gihyo.jp_files/like.htm" style="border: medium none; visibility: visible; width: 98px; height: 20px;" title="fb:like Facebook Social Plugin" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f1dad179c13d3e4" frameborder="0" height="1000px" width="100px"></iframe></span></fb:like></li>
+</ul>
+</div>
+<p class="date">2013年1月22日</p>
+
+<p class="author" itemprop="author">結城浩</p>
+
+</div>
+
+<p class="linkTag"> <a href="http://gihyo.jp/tagList/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0" rel="tag nofollow">アルゴリズム</a>, <a href="http://gihyo.jp/tagList/%E6%95%B0%E5%AD%A6" rel="tag nofollow">数学</a>, <a href="http://gihyo.jp/tagList/%E5%9B%B3%E5%BD%A2" rel="tag nofollow">図形</a></p>
+
+<div id="primaryTopTextPr" style="height: auto;"><div class="robots-nocontent textAdList01">
+
+
+
+
+</div></div>
+</div>
+
+<div class="readingTime">この記事を読むのに必要な時間：およそ 1 分</div>
+<div class="readingContent01"><div class="box01">
+<h3>問題</h3>
+
+<p>コンパスと定規とハサミを使って，与えられた長方形の紙を切りましょう。</p>
+
+<p>コンパスと定規をどのように使うかは，以下の12ステップで例示してあります。</p>
+
+<div class="illust02">
+<p><a href="http://image.gihyo.co.jp/assets/images/dev/serial/01/codeiq/0006/001.jpg" rel="lightbox" title="" class="imgLightbox"><img style="" src="gihyo.jp_files/TH460_001.jpg" alt="画像" title="" height="2098" width="460"></a></p>
+</div>
+
+<p>この例はハサミを2回だけ使うものですが，ハサミをちょうど40回使うことになる長方形を探してください。</p>
+</div>
+
+
+<div class="coherence"><hr></div>
+
+
+<dl style="">
+<dt>難易度</dt>
+<dd style="cursor: default;">★☆☆☆（当該領域で，基礎的なことができれば解けると思われるレベル）</dd>
+
+<dt>言語/領域（Perl，Pythonなど）</dt>
+<dd>アルゴリズム</dd>
+
+<dt>解答形式</dt>
+<dd><p>ファイルアップロード形式</p>
+
+<p><strong>※</strong>ハサミを40回使うことになる長方形の「縦の長さ」と「横の長さ」を<a href="http://dl.dropbox.com/u/110505645/CodeIQ/201301/CodeIQ_scissors.zip">サンプル解答用ファイル（Zipを解凍したフォルダ内にあるscissors.txt）</a>にならって"縦の長さx横の長さ"の形式で書き，アップロードしてください。</p></dd>
+
+<dt>解答評価のポイント</dt>
+<dd><ul>
+<li>縦の長さは横の長さよりも短くなければなりません（縦の長さ＜横の長さ）。</li>
+<li>採点対象となるのは解答ファイル「answer.txt」の1行目だけです。2行目以降には採点者（結城浩）あてのメッセージを自由にお書きくだ
+さい。たとえば自分が解答に至るまでに考えたことや作ったプログラムなどを書いてくださってもかまいません。ただし，answer.txtの内容
+は，Webサイトや書籍などに掲載される可能性があります。2行目以降に何も書かなくてもかまいません。</li>
+<li>文字コードや改行コードの差異は気にしなくても大丈夫です。</li>
+<li>ハサミを40回使わない解答は失格になります。</li>
+<li>ハサミを40回使う長方形を複数個見つけた場合でも，解答ファイル「answer.txt」の1行目だけが採点対象になります。</li>
+<li>長方形の面積が小さいものほど高得点になります。</li>
+<li>縦の長さと横の長さはいずれも正の整数とします。</li>
+</ul></dd>
+
+<dt>挑戦を開始する前にご準備いただきたいもの</dt>
+<dd><p>解答は，問題の指示にしたがって「answer.txt」というテキストファイルを作成し，解答画面からアップロードしていただきます。</p></dd>
+
+<dt>その他注意事項</dt>
+<dd><ul>
+<li>一度挑戦を開始すると，解答を送信しなかった場合でも，1回目のチャレンジは終了となります。</li>
+<li>何度でも挑戦できますが，最新の挑戦のみが採点されます。</li>
+<li>白紙に近いなど，採点不能なものはフィードバックいたしかねます。</li>
+<li>優秀解答者／面白解答者は，結城浩さんが出版するかもしれない本でニックネームと解答内容と評価のポイントを掲載させていただくことがあります。</li>
+<li>この問題の正解及びコードレビューは，技術評論社のサイト（<a href="http://gihyo.jp/dev/serial/01/codeiq">この連載上</a>）にて行います。</li>
+<li>優秀な解答，面白い解答をいただいた方は，ニックネーム，解答内容，解答フィードバック内容を公開させていただく可能性があります。ご了承ください。</li>
+</ul></dd>
+
+<dt>解答受付先</dt>
+<dd><a href="https://codeiq.jp/ace/yuki_hiroshi/q172">https://codeiq.jp/ace/yuki_hiroshi/q172</a></dd>
+
+<dt>掲載期間（開始～終了）</dt>
+<dd>1月22日(火)～1月30日（水）</dd>
+
+<dt>採点可能人数</dt>
+<dd>128人</dd>
+
+<dt>想定時間（分）</dt>
+<dd>30分～</dd>
+
+<dt>制限時間</dt>
+<dd>なし</dd>
+</dl></div>
+
+
+<div id="bannerRG1" class="robots-nocontent primaryBanner">
+<div id="div-gpt-ad-1369887592403-7" style="width:468px; height:60px; margin:0 auto">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1369887592403-7'); });
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/33530947/dev-mainregularbanner_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-mainregularbanner_0" id="google_ads_iframe_/33530947/dev-mainregularbanner_0" frameborder="0" height="60" width="468"></iframe></div></div>
+
+</div>
+
+<div class="sectionInfo01">
+
+<p class="linkTag"> <a href="http://gihyo.jp/tagList/%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0" rel="tag nofollow">アルゴリズム</a>, <a href="http://gihyo.jp/tagList/%E6%95%B0%E5%AD%A6" rel="tag nofollow">数学</a>, <a href="http://gihyo.jp/tagList/%E5%9B%B3%E5%BD%A2" rel="tag nofollow">図形</a></p>
+
+</div>
+
+</div>
+
+<div id="AdSenseContentB" class="robots-nocontent primaryBanner"><div id="div-gpt-ad-1369887592403-10" style="width:336px; height:auto; margin:0 auto">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1369887592403-10'); });
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/33530947/dev-articlerectangle_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-articlerectangle_0" id="google_ads_iframe_/33530947/dev-articlerectangle_0" frameborder="0" height="280" width="336"></iframe></div></div>
+</div>
+
+<div id="authorProfile" class="sectionBlock02">
+<h2>著者プロフィール</h2>
+<div class="profile01 clearfix" itemscope="" itemtype="http://data-vocabulary.org/Person">
+<div class="photo"><img src="gihyo.jp_files/HiroshiYuki.jpg" style="width:auto;height:auto;max-width:100px"></div>
+
+<div class="data">
+<h3>結城浩（ゆうきひろし）</h3>
+<p>数学青春物語<a href="http://www.hyuki.com/girl/">「数学ガール」シリーズ</a>作者。プログラミング言語入門書，IT技術書，数学入門書などの著書多数。</p>
+<p>日記：<a href="http://www.hyuki.com/d/">http://www.hyuki.com/d/</a><br>
+Web連載：<a href="http://www.hyuki.com/girl/note.html">http://www.hyuki.com/girl/note.html</a><br>
+メルマガ：<a href="http://www.hyuki.com/mm/">http://www.hyuki.com/mm/</a><br>
+Twitter：<a href="https://twitter.com/hyuki">@hyuki</a></p>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="backNumber01" class="sectionBlock01">
+<h2>バックナンバー</h2>
+<h3 class="linkHeading02"><a href="http://gihyo.jp/dev/serial/01/codeiq">エンジニアのスキルを試すコードパズル ─この問題，あなたは解けますか？</a></h3>
+<ul class="linkList02">
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0014">第14回（最終回）　辻真吾からの問題（第8回）解説編</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0013">第13回　倉橋一成からの問題（第7回）解説編</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0012">第12回　結城浩からの挑戦（第6回）解説編</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0011">第11回　小川卓からの問題（第4回）解説編</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0010">第10回　柳井政和からの問題（第3回）解説編</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0009">第9回　大塚弘記からの挑戦（第2回）解説編</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0008">第8回　宝くじでひと山当てるプログラムをPythonで作るには？─辻真吾からの問題</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0007">第7回　t検定による問題解決，Rで実践できますか？～データサイエンティストの統計学─倉橋一成からの問題</a></li>
+<li class="here">第6回　ハサミを使うタイミング～どうやって端を見つけるの？─結城浩からの問題</li>
+<li><a href="http://gihyo.jp/dev/serial/01/codeiq/0005">第5回　小飼弾からの挑戦（第1回）解説編</a></li>
+</ul>
+<p class="linkParagraph01"><a href="http://gihyo.jp/dev/serial/01/codeiq">バックナンバー一覧</a></p></div>
+
+
+<div id="relArticle" class="sectionBlock01"> 
+<h2>関連記事</h2> 
+<ul class="linkList02"> 
+<li><a href="http://gihyo.jp/news/report/2013/12/1801">paizaオンラインハッカソンPOH![ポー！]中間レポート――1週間で1万5,000ものコードが提出される！</a></li>
+<li><a href="http://gihyo.jp/magazine/wdpress/plus/978-4-7741-4993-6/0001">はじめに『日本語入力を支える技術 ―変わり続けるコンピュータと言葉の世界』</a></li>
+<li><a href="http://gihyo.jp/dev/column/01/prog/2011/diff_sd200906">diffの動作原理を知る～どのようにして差分を導き出すのか</a></li>
+<li><a href="http://gihyo.jp/dev/clip/01/orangenews/vol53/0004">QuickSilverが実装しているAlcorの「Abbreviation Scoring」解説</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/alpha-geek/0037">#19　プリファードインフラストラクチャー　太田 一樹，岡野原 大輔，田中 英行</a></li>
+</ul> 
+</div> 
+
+
+<div id="comment" class="robots-nocontent sectionBlock01">
+<a name="comment"></a>
+<h2>コメント</h2>
+<ul class="sectionList01">
+
+
+</ul>
+
+
+<div class="sectionBlock03">
+<a name="jfd322581c"></a>
+<h3>コメントの記入</h3>
+
+
+<form method="post" action="/dev/serial/01/codeiq/0006?jt#jfd322581c" class="inputForm01">
+	<input readonly="readonly" name="JotForm" value="d322581c482998404f0be662c7a4c791" type="hidden">
+	<input readonly="readonly" name="JotNow" value="1639675182" type="hidden">
+	<input readonly="readonly" name="parent" value="" type="hidden">
+	
+<table cellspacing="0">
+<tbody><tr> <th><label for="commentFormName">お名前</label></th> <td><input readonly="readonly" id="commentFormName" name="name" class="input" type="text"></td> </tr> <tr> <th><label for="commentFormAddress">メールアドレス</label></th> <td><input readonly="readonly" id="commentFormAddress" name="email" class="input" type="text"></td> </tr>
+<tr>
+<th><label for="commentFormTitle">タイトル</label></th>
+<td><input readonly="readonly" id="commentFormTitle" name="title" class="input" type="text"></td>
+</tr>
+<tr>
+<th><label for="commentFormComment">コメント</label></th>
+<td><textarea readonly="readonly" id="commentFormComment" name="content" cols="60" rows="15"></textarea></td>
+</tr>
+</tbody></table>
+
+<p class="submit"><input readonly="readonly" value="送信" class="submitButton" style="float:none;margin:0 auto" type="submit"></p>
+</form>
+</div>
+
+</div>
+</div>
+</article>
+<aside>
+<div id="secondary" class="robots-nocontent" itemscope="" itemtype="http://schema.org/WPSideBar">
+<div id="secondaryTopTextPr" class="textPR" style="height: auto;">
+<div class="prList01">
+
+
+
+
+</div>
+</div>
+<div class="banner" id="bannerRT1">
+<div id="div-gpt-ad-1369887592403-4" style="width:300px; height:auto; margin:0 auto">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1369887592403-4'); });
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/33530947/dev-rectangle1_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-rectangle1_0" id="google_ads_iframe_/33530947/dev-rectangle1_0" frameborder="0" height="300" width="300"></iframe></div></div>
+
+</div>
+<div id="gdp" class="sectionBlock04 clearfix">
+<a href="https://gihyo.jp/dp?utm_source=link&amp;utm_medium=banner&amp;utm_campaign=Web" target="_blank"><img class="btubrjvpmcilecpcsfco" src="gihyo.jp_files/gdp_banner201403.png" alt="技術評論社の電子書籍販売サイト『Gihyo Digital Publishing』" height="100" width="300"></a>
+</div>
+
+<div id="gihyojpSpecial" class="sectionBlock04 clearfix">
+<h2>ピックアップ</h2>
+<dl class="definition01">
+
+<dt><a href="http://gihyo.jp/dev/serial/01/recruit-lifestyle">リクルートライフスタイルの技術力を追え！</a></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/dev/serial/01/recruit-lifestyle"><img style="display: inline;" class="lazy" src="gihyo.jp_files/TH64_1416_recruit-lifestyle.png" data-original="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH64_1416_recruit-lifestyle.png" alt="リクルートライフスタイルの技術力を追え！" title="リクルートライフスタイルの技術力を追え！" height="64" width="64"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH64_1416_recruit-lifestyle.png"
+ alt="リクルートライフスタイルの技術力を追え！" title="リクルートライフスタイルの技術力を追え！" width="64" 
+height="64" /></noscript></a></div>
+<p>ビジネスを拡大し続けるリクルートライフスタイルの技術力を，編集部の徹底取材により紐解きます。</p>
+</dd>
+
+<dt><a href="http://gihyo.jp/dev/serial/01/conoha">個人利用から大規模開発までConoHaで始めるクラウド開発入門</a></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/dev/serial/01/conoha"><img style="display: inline;" class="lazy" src="gihyo.jp_files/TH64_1415_conoha.png" data-original="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH64_1415_conoha.png" alt="個人利用から大規模開発までConoHaで始めるクラウド開発入門" title="個人利用から大規模開発までConoHaで始めるクラウド開発入門" height="64" width="64"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH64_1415_conoha.png"
+ alt="個人利用から大規模開発までConoHaで始めるクラウド開発入門" 
+title="個人利用から大規模開発までConoHaで始めるクラウド開発入門" width="64" height="64" /></noscript></a></div>
+<p>本連載ではConoHaの特徴や魅力，実際のユースケースをもとにした応用的な使い方などを紹介します。</p>
+</dd>
+
+<dt><a href="http://gihyo.jp/ad/01/atlassian">開発スピードに限界を感じたときの処方箋</a></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/ad/01/atlassian"><img style="display: inline;" class="lazy" src="gihyo.jp_files/TH64_1297_atlassian.png" data-original="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH64_1297_atlassian.png" alt="開発スピードに限界を感じたときの処方箋" title="開発スピードに限界を感じたときの処方箋" height="64" width="64"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH64_1297_atlassian.png"
+ alt="開発スピードに限界を感じたときの処方箋" title="開発スピードに限界を感じたときの処方箋" width="64" 
+height="64" /></noscript></a></div>
+<p>「JIRA」をはじめとするアトラシアンのツール群。多くのオープンソースソフトウェアを継続して提供する支えとなっている使い易さを探ってみます。</p>
+</dd>
+
+<dt><a href="http://gihyo.jp/dev/column/01/cloud/2015/sap-hcp">インメモリ型クラウドでビジネススケールを拡大</a></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/dev/column/01/cloud/2015/sap-hcp"><img style="display: inline;" class="lazy" src="gihyo.jp_files/TH64_1424_saphpcCP.png" data-original="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH64_1424_saphpcCP.png" alt="インメモリ型クラウドでビジネススケールを拡大" title="インメモリ型クラウドでビジネススケールを拡大" height="64" width="64"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH64_1424_saphpcCP.png"
+ alt="インメモリ型クラウドでビジネススケールを拡大" title="インメモリ型クラウドでビジネススケールを拡大" width="64" 
+height="64" /></noscript></a></div>
+<p>SAP HANA Cloud Platformの特徴とほかのクラウドプラットフォームとの比較，また，実際に無料版を導入して試用するまでの手順を紹介します。</p>
+</dd>
+
+</dl>
+</div>
+
+<div id="eventInfo" class="sectionBlock04 clearfix"><h2>イベント</h2>
+<ul class="linkList02">
+<li><a href="https://www.openstack.org/summit/tokyo-2015/" rel="external">OpenStack Summit | Tokyo 2015</a>（10/27～30）</li>
+<li><a href="http://codeblue.jp/2015/" rel="external">CODE BLUE 2015</a>（10/28, 29）</li>
+<li><a href="https://tokyo.wordcamp.org/2015/" rel="external">WordCamp Tokyo 2015</a>（10/31, 11/1）</li>
+<li><a href="http://sa2015.siggraph.org/jp/" rel="external">SIGGRAPH ASIA 2015</a>（11/2～5）</li>
+<li><a href="https://redhatforum.jp/" rel="external">RED HAT FORUM 2015 TOKYO</a>（11/4）</li>
+<li><a href="http://texconf15.tumblr.com/" rel="external">TeXユーザの集い2015</a>（11/7）</li>
+<li><a href="http://nodefest.jp/2015/" rel="external">東京Node学園祭2015</a>（11/7）</li>
+<li><a href="http://events.linuxfoundation.jp/events/enterprise-users-meeting-japan" rel="external">Enterprise Users Meeting Japan 2015</a>（11/9）</li>
+<li><a href="http://www.openid.or.jp/summit/2015/" rel="external">OpenID Summit Tokyo 2015</a>（11/10）</li>
+<li><a href="https://clouderaworld.tokyo/" rel="external">Cloudera World Tokyo 2015</a>（11/10）</li>
+<li><a href="http://www.event-web.net/adobelive2015/max/" rel="external">Adobe Live 2015 - Best of MAX</a>（11/11）</li>
+<li><a href="http://www.iij.ad.jp/techweek2015/?i=gihyo_tw2015" rel="external">IIJ Technical WEEK 2015</a>（11/11～13）</li>
+<li><a href="http://www.ricksoft.jp/seminar/s20151112.html" rel="external">第2弾！「サービスレベルの標準化」「対応工数の削減」して「顧客満足度向上」も実現するサービスデスク活用とは</a>（11/12）</li>
+<li><a href="https://pacsec.jp/" rel="external">PacSec 2015</a>（11/11, 12）</li>
+<li><a href="http://2015.rubyworld-conf.org/ja/" rel="external">RubyWorld Conference 2015</a>（11/12, 13）</li>
+<li><a href="http://ja.avtokyo.org/avtokyo2015" rel="external">AVTOKYO2015</a>（11/14）</li>
+<li><a href="http://www.mozilla.jp/events/devcon/2015/tokyo/" rel="external">Firefox Developers Conference 2015 in Tokyo</a>（11/15）</li>
+<li><a href="https://internetweek.jp/" rel="external">Internet Week 2015</a>（11/17～20）</li>
+<li><a href="http://www.jasa.or.jp/expo/et/" rel="external">Embedded Technology 2015</a>（11/18～20）</li>
+<li><a href="http://www.postgresql.jp/events/jpug-pgcon2015/" rel="external">PostgreSQLカンファレンス2015</a>（11/27）</li>
+<li><a href="https://groonga.doorkeeper.jp/events/31482" rel="external">Groonga Meatup 2015</a>（11/29）</li>
+<li><a href="http://www.ricksoft.jp/seminar/s20151204.html" rel="external">アトラシアン共催 JIRA 7アップデートセミナー</a>（12/4）</li>
+<li><a href="https://atnd.org/events/71243" rel="external">Japan.R 2015</a>（12/5）</li>
+<li><a href="http://rubykaigi.org/2015" rel="external">RubyKaigi 2015</a>（12/11～13）</li>
+<li><a href="https://www.elastic.co/elasticon/tour/2015/tokyo" rel="external">Elastic{ON} Tour 2015 in Tokyo</a>（12/16）</li>
+<li><a href="http://scalamatsuri.org/" rel="external">ScalaMatsuri 2016</a>（1/30, 31）</li>
+<li><a href="http://2016.cross-party.com/" rel="external">エンジニアサポートCROSS2016</a>（2/4）</li>
+<li><a href="http://webrtcconference.jp/" rel="external">WebRTC Conference Japan 2016</a>（2/16, 17）</li>
+<li><a href="https://droidkaigi.github.io/2016/" rel="external">DroidKaigi 2016</a>（2/18, 19）</li>
+</ul></div>
+<div class="banner" id="bannerRT2">
+<div id="div-gpt-ad-1369887592403-5" style="width:300px; height:auto; margin:0 auto">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1369887592403-5'); });
+</script>
+<div style="border: 0pt none;" id="google_ads_iframe_/33530947/dev-rectangle2_0__container__"><iframe src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" style="border: 0px none; vertical-align: bottom;" marginheight="0" marginwidth="0" scrolling="no" name="google_ads_iframe_/33530947/dev-rectangle2_0" id="google_ads_iframe_/33530947/dev-rectangle2_0" frameborder="0" height="300" width="300"></iframe></div></div>
+
+</div>
+<div id="otherSerial" class="sectionBlock01">
+<h2>その他の連載</h2>
+<dl class="thumbnailList01">
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/lifestyle/serial/01/ganshiki-soushi">玩式草子─ソフトウェアとたわむれる日々</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/lifestyle/serial/01/ganshiki-soushi"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2009/thumb/TH32_457_gansiki.png" alt="玩式草子─ソフトウェアとたわむれる日々" title="玩式草子─ソフトウェアとたわむれる日々" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2009/thumb/TH32_457_gansiki.png"
+ alt="玩式草子─ソフトウェアとたわむれる日々" title="玩式草子─ソフトウェアとたわむれる日々" width="32" 
+height="32" /></noscript></a></div>
+<p>Plamo Linuxのメンテナンスの傍ら，Linuxやオープンソースソフトと日々を過ごす著者が，その魅力とつきあい方を，エッセイ風味でお届けします。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/design/serial/01/website-pickup">いま，見ておきたいウェブサイト</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/design/serial/01/website-pickup"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2009/thumb/TH32_316_website-pickup.png" alt="いま，見ておきたいウェブサイト" title="いま，見ておきたいウェブサイト" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2009/thumb/TH32_316_website-pickup.png"
+ alt="いま，見ておきたいウェブサイト" title="いま，見ておきたいウェブサイト" width="32" height="32" /></noscript></a></div>
+<p>この連載では，国内外の最新のウェブサイトを隔週更新で取り上げ，これら最新サイトの特徴や素晴らしい部分を，さまざまな角度から解説していきます。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe">Ubuntu Weekly Recipe</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2008/thumb/TH32_112_ubuntuRecipe.png" alt="Ubuntu Weekly Recipe" title="Ubuntu Weekly Recipe" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2008/thumb/TH32_112_ubuntuRecipe.png"
+ alt="Ubuntu Weekly Recipe" title="Ubuntu Weekly Recipe" width="32" 
+height="32" /></noscript></a></div>
+<p>Ubuntuの強力なデスクトップ機能を活用するための，いろいろなレシピをお届けします。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/dev/serial/01/practical-programming-with-processing">Processingで学ぶ 実践的プログラミング専門課程</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/dev/serial/01/practical-programming-with-processing"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH32_1287_practical-programming-with-processing.png" alt="Processingで学ぶ 実践的プログラミング専門課程" title="Processingで学ぶ 実践的プログラミング専門課程" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH32_1287_practical-programming-with-processing.png"
+ alt="Processingで学ぶ 実践的プログラミング専門課程" title="Processingで学ぶ 実践的プログラミング専門課程"
+ width="32" height="32" /></noscript></a></div>
+<p>Processing言語を使って，プログラミングの初心者向けに，実践的なプログラミング技術の学習を行います。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/dev/serial/01/mysql-road-construction-news">MySQL道普請便り</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/dev/serial/01/mysql-road-construction-news"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH32_1428_mysql.png" alt="MySQL道普請便り" title="MySQL道普請便り" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH32_1428_mysql.png"
+ alt="MySQL道普請便り" title="MySQL道普請便り" width="32" height="32" /></noscript></a></div>
+<p>本連載では，MySQLを使ったアプリ開発・運用に関するノウハウをご紹介していきます。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/design/serial/01/away3d-typescript">Away3D TypeScriptではじめる3次元表現</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/design/serial/01/away3d-typescript"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH32_1319_away3d-typescript.png" alt="Away3D TypeScriptではじめる3次元表現" title="Away3D TypeScriptではじめる3次元表現" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH32_1319_away3d-typescript.png"
+ alt="Away3D TypeScriptではじめる3次元表現" title="Away3D TypeScriptではじめる3次元表現" 
+width="32" height="32" /></noscript></a></div>
+<p>JavaScriptライブラリ「Away3D TypeScript」を用いた，3次元表現を解説します。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/dev/serial/01/recruit-lifestyle">リクルートライフスタイルの技術力を追え！</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/dev/serial/01/recruit-lifestyle"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH32_1416_recruit-lifestyle.png" alt="リクルートライフスタイルの技術力を追え！" title="リクルートライフスタイルの技術力を追え！" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2015/thumb/TH32_1416_recruit-lifestyle.png"
+ alt="リクルートライフスタイルの技術力を追え！" title="リクルートライフスタイルの技術力を追え！" width="32" 
+height="32" /></noscript></a></div>
+<p>数多くの大規模サービスを展開するリクルートライフスタイルでは，「ギャザリー」などの新サービスの提供も積極的に進められています。ビジネスを拡大し続ける同社の技術力を，編集部の徹底取材により紐解きます。</p>
+</dd>
+<dt><h3 class="linkHeading02"><a href="http://gihyo.jp/admin/serial/01/infrasec">インフラセキュリティの処方箋</a></h3></dt>
+<dd class="clearfix">
+<div class="logo"><a href="http://gihyo.jp/admin/serial/01/infrasec"><img class="lazy" src="gihyo.jp_files/reading.gif" data-original="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH32_1271_infrasec.png" alt="インフラセキュリティの処方箋" title="インフラセキュリティの処方箋" height="32" width="32"><noscript><img
+ 
+src="http://image.gihyo.co.jp/assets/images/ICON/2014/thumb/TH32_1271_infrasec.png"
+ alt="インフラセキュリティの処方箋" title="インフラセキュリティの処方箋" width="32" height="32" /></noscript></a></div>
+<p>本連載はネットワーク管理者，インフラエンジニアなど向けの情報として，昨今のセキュリティの問題や対策方法を記して行きます。</p>
+</dd>
+
+</dl>
+<p class="linkParagraph01"><a href="http://gihyo.jp/serial">連載一覧</a></p>
+</div>
+
+<div id="gihyojpSpecial" class="sectionBlock04 clearfix">
+<h2>gihyo.jp Special</h2>
+<ul class="linkList02">
+<li><a href="http://gihyo.jp/ad/01/gloops">人気ソーシャルアプリを支えるグループスのインフラ環境／開発現場に迫る!!</a></li>
+<li><a href="http://gihyo.jp/ad/01/azure_frontier">Windows Azure ユーザーズフロンティア</a></li>
+<li><a href="http://gihyo.jp/ad/01/mixi_infra">大規模ソーシャルサービス mixiを支える技術</a></li>
+<li><a href="http://gihyo.jp/ad/01/infra">gihyo.jp インフラエンジニア情報局</a></li>
+<li><a href="http://gihyo.jp/ad/01/power_up">エンジニアパワーアップ講座 ～システム基盤を活用するための基礎知識～</a></li>
+<li><a href="http://gihyo.jp/ad/2008/test">テストエンジニア ステーション</a></li>
+<li><a href="http://gihyo.jp/news/interview/20090406">IVIAに賭けた日本のテスト技術への想い</a></li>
+<li><a href="http://gihyo.jp/design/serial/01/net_dynamism">疾走するネット・ダイナミズム</a></li>
+<li><a href="http://gihyo.jp/ad/01/hosting">レンタルサーバ導入ガイド</a></li>
+</ul>
+
+</div>
+
+
+</div>
+</aside>
+</div>
+<aside>
+<div id="sub" class="robots-nocontent" itemscope="" itemtype="http://schema.org/WPSideBar">
+
+<div id="contentList" class="sectionBlock02">
+<div class="section">
+<h2><a href="http://gihyo.jp/" class="gihyojp"><img src="gihyo.jp_files/gihyojp_logo.png" alt="gihyo.jp" height="16" width="84"></a></h2>
+<ul class="level01">
+<li><a href="http://gihyo.jp/dev" title="DEVELOPER STAGE">デベロッパ</a></li><li><a href="http://gihyo.jp/admin" title="ADMINISTRATOR STAGE">アドミニストレータ</a></li><li><a href="http://gihyo.jp/design" title="WEB+DESIGN STAGE">WEB+デザイン</a></li><li><a href="http://gihyo.jp/lifestyle" title="LIFESTYLE STAGE">ライフスタイル</a></li><li><a href="http://gihyo.jp/science" title="SCIENCE STAGE">サイエンス</a></li><li><a href="http://gihyo.jp/news" title="NEWS &amp; REPORT">ニュース&amp;レポート</a></li></ul>
+</div>
+<div class="section">
+<h2><a href="http://gihyo.jp/book">書籍案内</a></h2>
+<ul class="level01"><li><a href="http://gihyo.jp/book/list" title="新刊書籍">新刊書籍</a></li><li><a href="http://gihyo.jp/book/genre" title="書籍ジャンル一覧">書籍ジャンル一覧</a></li><li><a href="http://gihyo.jp/book/series" title="書籍シリーズ一覧">書籍シリーズ一覧</a></li><li><a href="http://gihyo.jp/book/pickup" title="新刊ピックアップ">新刊ピックアップ</a></li><li><a href="http://gihyo.jp/book/longseller" title="ロングセラー">ロングセラー</a></li><li><a href="http://gihyo.jp/book/dennou" title="電脳会議">電脳会議</a></li></ul>
+</div>
+<div class="section">
+<h2><a href="http://gihyo.jp/magazine">定期刊行物一覧</a></h2>
+<ul class="level01">
+<li><a href="http://gihyo.jp/magazine/SD" title="Software Design" class="sd">Software Design</a></li><li><a href="http://gihyo.jp/magazine/wdpress" title="WEB+DB PRESS" class="wdpress">WEB+DB PRESS</a></li></ul>
+</div>
+
+</div>
+
+<div id="pageLink" class="sectionBlock01">
+<ul class="imageList02">
+<li><a href="https://gihyo.jp/dev/serial/01/funny-play/form"><img src="gihyo.jp_files/funny-play3.png" alt="「きたみりゅうじの聞かせて珍プレー 」投稿案内" height="68" width="155"></a></li>
+</ul>
+</div>
+
+<div id="recentTag" class="sectionBlock01">
+<h2 class="bigBullet">主なタグ</h2>
+<ul class="linkList01">
+<li><a href="http://gihyo.jp/tagList/FreeBSD" rel="tag">FreeBSD</a></li>
+<li><a href="http://gihyo.jp/tagList/Ubuntu" rel="tag">Ubuntu</a></li>
+<li><a href="http://gihyo.jp/tagList/Web%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3" rel="tag">Webデザイン</a></li>
+<li><a href="http://gihyo.jp/tagList/Linux" rel="tag">Linux</a></li>
+<li><a href="http://gihyo.jp/tagList/%E3%82%B9%E3%83%9E%E3%83%BC%E3%83%88%E3%83%95%E3%82%A9%E3%83%B3" rel="tag">スマートフォン</a></li>
+<li><a href="http://gihyo.jp/tagList/Android" rel="tag">Android</a></li>
+<li><a href="http://gihyo.jp/tagList/Web%E5%BA%83%E5%91%8A" rel="tag">Web広告</a></li>
+<li><a href="http://gihyo.jp/tagList/%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89" rel="tag">クラウド</a></li>
+
+</ul>
+<p class="linkParagraph02"><a href="http://gihyo.jp/tagList">[ タグ一覧 ]</a></p>
+</div>
+<div id="contentsRank" class="sectionBlock01">
+<h2 class="bigBullet">昨日よく読まれた記事</h2>
+<ul class="linkList01">
+<li><a href="http://gihyo.jp/admin/serial/01/ubuntu-recipe/0395">第395回　Ubuntu 15.10の日本語入力</a></li>
+<li><a href="http://gihyo.jp/news/report/2015/10/2701">さよならSeasar，最後の!? Seasar Conference開催</a></li>
+<li><a href="http://gihyo.jp/lifestyle/clip/01/awt/201510/29">2015年10月第5週　LGがIntelと共同でモバイル用CPUを開発中？ほか</a></li>
+<li><a href="http://gihyo.jp/design/clip/01/weekly-web-tech/201510/29">2015年10月第5週号　1位は，Webサイトの直帰率を下げるためのヒント，気になるネタは，サンスター，スマホ連携するスマート歯ブラシ「G･U･M PLAY」　加速度センサーで磨き方をチェック</a></li>
+<li><a href="http://gihyo.jp/admin/serial/01/ad2010/0001">第1回　誰も教えてくれないActive DirectoryとLDAPの「本当の関係」［前編］</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/practical-programming-with-processing/0026">第26回　デザインパターン（4） Template Method</a></li>
+<li><a href="http://gihyo.jp/news/nr/2015/10/2801">全国の小中高生を対象としたスマートフォン向けアプリ開発コンテスト「アプリ甲子園2015」決勝大会を開催，優勝者が決定</a></li>
+<li><a href="http://gihyo.jp/news/info/2015/10/2801">パソナテック，Uターン起業の体験トークイベント「ギフ トーーク！」開催</a></li>
+<li><a href="http://gihyo.jp/design/serial/01/server-knowledge/0002">第2回　ファイル転送はFTPじゃなくてSFTP？ SSHで安全にサーバへ入ろう</a></li>
+<li><a href="http://gihyo.jp/dev/serial/01/mysql-road-construction-news/0005">第5回　Dockerで複数バージョンのMySQLを開発環境に用意する</a></li>
+
+</ul>
+</div>
+<div id="pressRelease" class="sectionBlock01">
+<h2 class="bigBullet">企業動向</h2>
+<ul class="linkList01">
+<li>10/30&nbsp;<a href="http://gihyo.jp/ad/pr/2015/NRR2015140559">【NEC報道資料】 NECと日本マイクロソフト，システム認証基盤領...</a>（日本電気株式会社）</li>
+<li>10/30&nbsp;<a href="http://gihyo.jp/ad/pr/2015/NRR2015140522">店舗・施設の近隣にいるユーザーにターゲティングできるFacebook...</a>（マインドフリー株式会社）</li>
+<li>10/30&nbsp;<a href="http://gihyo.jp/ad/pr/2015/NRR2015140469">【企業教育とは】＃42 マンネリな仕事をするな！ プロは常に現状...</a>（日本テクノ株式会社）</li>
+<li>10/30&nbsp;<a href="http://gihyo.jp/ad/pr/2015/NRR2015140548">赤ずきんから40周年限定までマイメロディの歴代デザインが大集合...</a>（株式会社TOLOT）</li>
+<li>10/30&nbsp;<a href="http://gihyo.jp/ad/pr/2015/NRR2015140464">パナソニックがネットワーク対応 ACサーボモータ&amp;アンプ「MINAS ...</a>（パナソニックグループ）</li>
+
+</ul>
+<p class="linkParagraph02"><a href="http://gihyo.jp/ad/pr">[ 企業動向一覧 ]</a></p>
+</div>
+
+</div>
+</aside>
+
+</div>
+<footer role="contentinfo">
+<div id="footer" itemscope="" itemtype="http://schema.org/WPFooter">
+
+<div id="footerContent" class="clearfix">
+
+<div id="information">
+<h2><a href="http://gihyo.jp/mail">メールでのお知らせ</a></h2>
+<p>メールで次の案内をお送りしております。メールの配信を希望する方は，利用したい項目をチェックしてメールアドレスを入力し，［登録］ボタンをクリックしてください。</p>
+<form id="informationForm" name="informationForm" method="post" action="/mail?mailregist#mailinfo">
+<ul>
+<li><input readonly="readonly" id="informationFormCheck00" name="gihyojp" value="checked" checked="checked" type="checkbox">
+<label for="informationFormCheck00">gihyo.jp UPDATES［ほぼ週間に1回］</label>
+</li>
+<li><input readonly="readonly" id="informationFormCheck01" name="newPublished" value="checked" checked="checked" type="checkbox">
+<label for="informationFormCheck01">新刊メールマガジン［ほぼ週間に1回］</label>
+</li>
+<li><input readonly="readonly" id="informationFormCheck02" name="dennou" value="checked" checked="checked" type="checkbox">
+<label for="informationFormCheck02">電脳会議の各号案内［ほぼ1ヵ月半に1回］</label></li>
+</ul>
+<p class="submit"><input readonly="readonly" name="mailaddress" id="informationFormEmail" value="e-mailアドレスを入力" onfocus="this.value=(this.value=='e-mailアドレスを入力')? '' : this.value ;" onblur="this.value=(this.value=='')? 'e-mailアドレスを入力' : this.value ;" type="text">
+<input readonly="readonly" class="submitButton" id="informationFormSubmit" value="登録" type="submit"></p>
+</form>
+<p class="note">※変更する場合や停止する場合は，<a href="http://gihyo.jp/mail">登録情報変更ページ</a>をご覧ください。</p>
+<p class="note">※登録いただいたメールアドレスには，そのお知らせ以外，配信いたしません。</p>
+</div>
+
+<div id="siteSummary">
+<h2><a href="http://gihyo.jp/site">このサイトについて</a></h2>
+<ul>
+<li><a href="http://gihyo.jp/site/profile">会社案内</a></li>
+<li><a href="http://gihyo.jp/site/policy">プライバシーポリシー</a></li>
+<li><a href="http://gihyo.jp/site/social">ソーシャルメディアの運用について</a></li>
+<li><a href="http://gihyo.jp/site/purchase">刊行物の購入について</a></li>
+<li><a href="http://gihyo.jp/site/ad">広告出稿のご案内</a></li>
+<li><a href="http://gihyo.jp/site/inquiry">お問い合わせ</a></li>
+</ul>
+</div>
+
+</div>
+
+<div class="utility">
+<ul class="logoIcon">
+<li class="num01"><a href="http://gihyo.jp/magazine/SD" title="「Software Design」のトップページに移動"><img src="gihyo.jp_files/btn_icon_sd.gif" alt="Software Design" class="buttons" height="21" width="23"></a></li>
+<li class="num02"><a href="http://gihyo.jp/magazine/wdpress" title="「WEB+DB PRESS」のトップページに移動"><img src="gihyo.jp_files/btn_icon_wd.gif" alt="WEB+DB PRESS" class="buttons" height="21" width="23"></a></li>
+</ul>
+
+<p class="feed"><a href="http://gihyo.jp/feed" title="gihyo.jpのフィードを確認">RSS/ATOM</a></p>
+<p id="gotoHeader"><a href="http://gihyo.jp/dev/serial/01/codeiq/0006#header">このページの先頭へ</a></p>
+</div>
+
+<div id="copyright">
+<div class="logo"><a href="http://www.gihyo.co.jp/"><img src="gihyo.jp_files/gihyo_logo.png" alt="技術評論社" height="18" width="97"></a></div>
+<p>Copyright © 2007-2015 All Rights Reserved by Gijutsu-Hyohron Co., Ltd.<br>ページ内容の全部あるいは一部を無断で利用することを禁止します。個別にライセンスが設定されている記事等はそのライセンスに従います。</p>
+</div>
+
+</div>
+</footer>
+
+</div>
+<noscript><link rel="stylesheet" href="http://image.gihyo.co.jp/assets/templates/gihyojp2007/css/setAll1013.css"></noscript>
+<script type="text/javascript">
+var 
+l=document.createElement('link');l.setAttribute('rel','stylesheet');l.setAttribute('type','text/css');l.setAttribute('media','all');l.setAttribute('href','http://image.gihyo.co.jp/assets/templates/gihyojp2007/css/setAll1013.css');document.head.appendChild(l);l=null;
+$('#searchFormKeyword,
+ #searchForm 
+form').focus(function(e){this.value=(this.value=='検索したい用語を入力
+')?'':this.value;}).blur(function(e){this.value=(this.value=='')?'検索したい用
+語を入力':this.value;}).submit(function(e){this.value=(this.value=='検索したい用語を
+入力')?'':this.value;});
+function loadScript(src,callback){var 
+e=document.createElement('script');if(e.readyState){e.onreadystatechange=function(){if(e.readyState=='loaded'||e.readyState=='complete'){e.onreadystatechange=null;callback();}};}else{e.onload=function(){callback();}};e.type='text/javascript';e.async=true;e.src=src;var
+ 
+s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(e,s);}
+loadScript('http://image.gihyo.co.jp/assets/js/jquery.lazyload.min.js',function(){$("#sub
+ img.lazy").show().lazyload();$("#secondary 
+img.lazy").show().lazyload();$("#primary img.lazy").show().lazyload();
+});
+loadScript('http://image.gihyo.co.jp/assets/js/smoothscroll-min.js',function(){});
+</script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-4149703-1', 'auto');
+ga('require', 'displayfeatures');
+ga('send', 'pageview');
+</script>
+<script async="">$(window).on('load', function(){setTimeout(function(){
+  tadclip = function ($obj) {
+    if ( $obj.contents().find('body').html() === '' ) {
+      $obj.parent().parent().remove();
+    } else {
+      var $base = $obj.contents();
+      var html = $base.find('body').html();
+      $base.find('body').html(html.replace(/^([\s\S]*?)(<br>\s*)?$/, 
+"$1"));
+      var style = 
+'<style>body{font-family:Arial,sans-serif;font-size:14px;line-height:18px;padding-top:10px}span{display:block;border-bottom:1px
+ solid 
+#E5E5E5;padding-bottom:10px}a{color:#05C;text-decoration:none;padding:4px
+ 0}a span{border-bottom:none;padding-bottom:2px}b{padding:0 0 0 
+18px;background:url(/assets/templates/gihyojp2007/image/pr13x13.gif) 0px
+ 0 
+no-repeat}a:hover{color:#38C;text-decoration:underline}body>br{display:none}</style>'
+
+      $base.find('body').prepend(style);
+      setTimeout(function(){
+        var h = $base.height();
+        if(h < 18){
+          h = $base.find('body').height();
+          if(h < 14){
+            h = 46;
+          }
+        }
+        $obj.attr('height', h);
+      }, 10);
+    }
+  }
+  $tl1 = $('iframe[id="google_ads_iframe_/33530947/dev-textlink1_0"]');
+  if ( $tl1.length ) { tadclip($tl1); }
+  setTimeout(function(){
+    var $tl2 = 
+$('iframe[id="google_ads_iframe_/33530947/dev-textlink2_0"]');
+    if ( $tl2.length ) { tadclip($tl2); }
+    $('#primaryTopTextPr').css('height', 'auto');
+  }, 80);
+  ctadclip = function ($cobj) {
+    if ( $cobj.contents().find('body').html() === '' ) {
+      $cobj.parent().parent().remove();
+    } else {
+      var $cbase = $cobj.contents();
+      var html = $cbase.find('body').html();
+      $cbase.find('body').html(html.replace(/^([\s\S]*?)(<br>\s*)?$/, 
+"$1"));
+      var style = "<style>body{font-family:Arial,'ＭＳ Ｐゴシック','MS 
+PGothic','ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic 
+ProN',sans-serif;font-size:12px;line-height:16px;padding-top:4px;text-rendering:optimizeLegibility;-webkit-font-feature-settings:'kern','liga','palt';-moz-font-feature-settings:'kern','liga','palt';font-feature-settings:'kern','liga','palt'}span{display:block}a{color:#05C;text-decoration:none;font-size:14px;line-height:19px}b{padding:6px
+ 0 0 
+15px;background:url(/assets/templates/gihyojp2007/image/bg/pr_02.gif) 
+0px 10px 
+no-repeat}a:hover{color:#38C;text-decoration:underline}body>br{display:none}</style>"
+
+      $cbase.find('body').prepend(style);
+      setTimeout(function(){
+        var h = $cbase.height();
+        if(h < 16){
+          h = $cbase.find('body').height();
+          if(h < 12){
+            h = 54;
+          }
+        }
+        $cobj.attr('height', h);
+      }, 10);
+    }
+  }
+  $ct1 = 
+$('iframe[id="google_ads_iframe_/33530947/dev-centertextlink1_0"]');
+  if ( $ct1.length ) { ctadclip($ct1); }
+  setTimeout(function(){
+    var $ct2 = 
+$('iframe[id="google_ads_iframe_/33530947/dev-centertextlink2_0"]');
+    if ( $ct2.length ) { ctadclip($ct2); }
+    $('#secondaryTopTextPr').css('height', 'auto');
+  }, 80);
+}, 100)});</script>
+
+
+<script type="text/javascript">
+(function(a){a("a 
+img.buttons").hover(function(){this.originalSrc=a(this).attr("src");this.rolloverSrc=this.originalSrc.replace(/(_on)?(.gif|.jpg|.png)$/,"_on$2");this.rolloverImg=new
+ 
+Image;this.rolloverImg.src=this.rolloverSrc;a(this).attr("src",this.rolloverSrc)},function(){a(this).attr("src",this.originalSrc)})})(jQuery);
+(function(n){var
+ m=new function(){for(var 
+a="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".split(""),b=[],c=0;64>c;c++)b["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".charAt(c)]=c;this.encode=function(b,c){var
+ 
+d=c?l.unpackUTF8(b):l.unpackChar(b),i=d.length%3,h="",f,j=0;if(i)for(f=3-i;0<f;f--)d[d.length]=0;for(f=0;f<d.length;f+=3)j=d[f]<<16|d[f+1]<<8|d[f+2],h+=a[j>>>18&63]+a[j>>>12&63]+a[j>>>6&63]+a[j&63];if(i){i=3-i;for(h=h.substr(0,h.length-i);i--;)h+="="}return
+ h};
+this.decode=function(a,c){var d;d=a.replace(/[^A-Za-z0-9\+\/]/g,"");var 
+i=d.length%4,h,f,j,k=[];if(i)for(f=0;f<4-i;f++)d+="A";for(h=f=0;f<d.length;f+=4,h+=3)j=b[d.charAt(f)]<<18|b[d.charAt(f+1)]<<12|b[d.charAt(f+2)]<<6|b[d.charAt(f+3)],k[h]=j>>>16,k[h+1]=j>>>8&255,k[h+2]=j&255;i&&(k.length-=[0,0,2,1][i]);return
+ c?l.packUTF8(k):l.packChar(k)}},l=new 
+function(){this.unpackUTF16=function(a){var 
+b,c=[];for(b=0;b<a.length;b++)c[b]=a.charCodeAt(b);return 
+c};this.unpackChar=function(a){var a=this.unpackUTF16(a),
+b,c,e=[];for(c=b=0;b<a.length;b++)255>=a[b]?e[c++]=a[b]:(e[c++]=a[b]>>8,e[c++]=a[b]&255);return
+ e};this.packChar=this.packUTF16=function(a){var b,c="";for(b in 
+a)c+=String.fromCharCode(a[b]);return 
+c};this.unpackUTF8=function(a){return 
+this.toUTF8(this.unpackUTF16(a))};this.packUTF8=function(a){return 
+this.packUTF16(this.toUTF16(a))};this.toUTF8=function(a){var 
+b=[],c=0,e,g,d;for(e=0;e<a.length;e++)if(d=a[e],127>=d)b[c++]=d;else 
+if(2047>=d)b[c++]=192|d>>>6,b[c++]=128|d&63;else if(65535>=d)b[c++]=
+224|d>>>12,b[c++]=128|d>>>6&63,b[c++]=128|d&63;else{for(g=4;d>>6*g;)g++;for(b[c++]=65280>>>g&255|d>>>6*--g;g--;)b[c++]=128|d>>>6*g&63}return
+ b};this.toUTF16=function(a){var 
+b=[],c=0,e,g;for(e=0;e<a.length;e++,c++)if(127>=a[e])b[c]=a[e];else 
+if(6==a[e]>>5)b[c]=(a[e]&31)<<6|a[++e]&63;else 
+if(14==a[e]>>4)b[c]=(a[e]&15)<<12|(a[++e]&63)<<6|a[++e]&63;else{for(g=1;a[e]&32>>>g;)g++;for(b[c]=a[e]&31>>>g;0<=g--;)b[c]=b[c]<<6^a[++e]&63}return
+ b};this.URLencode=function(a){return a.replace(/([^a-zA-Z0-9_\-\.])/g,
+function(a,c){if(" "==c)return"+";var 
+e=l.toUTF8([c.charCodeAt(0)]),g="",d;for(d in 
+e)d=e[d].toString(16),1==d.length&&(d="0"+d),g+="%"+d;return 
+g})};this.URLdecode=function(a){a=a.replace(/\+/g," 
+");a=a.replace(/%([a-fA-F0-9][a-fA-F0-9])/g,function(a,c){return 
+String.fromCharCode(parseInt(c,16))});return 
+this.packChar(this.toUTF16(this.unpackUTF16(a)))}};n.extend({base64:{encode:m.encode,decode:m.decode,codec:"function"==typeof
+ atob?"builtin":"alternate"}})})(jQuery);
+window.onerror=function(mes,fname,lnum){var 
+erIgnore=['top.GLOBALS','originalCreateNotification','canvas.contentDocument','fb_xd_fragment','Script
+ 
+error.'];for(i=0;i<erIgnore.length;i++){if(mes.indexOf(erIgnore[i])>-1){return
+ false;}};var mes='message:'+mes+', file:'+fname+', line:'+lnum+', 
+href:'+location.href+', 
+UA:'+window.navigator.userAgent;ga('send','event','Error','JSError',mes);};</script>
+<script src="gihyo.jp_files/jquery_002.js" type="text/javascript" defer="defer"></script>
+<link href="gihyo.jp_files/jquery.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" defer="defer">
+$(function() {
+  $('a[rel=lightbox]').lightBox({
+    imageBlank: 'http://image.gihyo.co.jp/assets/images/blank.gif',
+    imageLoading: 'http://image.gihyo.co.jp/assets/images/loading.gif',
+    imageBtnClose: 'http://image.gihyo.co.jp/assets/images/closelabel.gif',
+    imageBtnPrev: 'http://image.gihyo.co.jp/assets/images/ghPrev.png',
+    imageBtnNext: 'http://image.gihyo.co.jp/assets/images/ghNext.png',
+    txtImage: '',
+    txtOf: '/'
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+var html = "<h2>イベント</h2>\n<ul class=\"linkList02\">\n";
+var array = {
+'https://www.openstack.org/summit/tokyo-2015/': 
+'T3BlblN0YWNrIFN1bW1pdCB8IFRva3lvIDIwMTXvvIgxMC8yN++9njMw77yJ',
+'http://codeblue.jp/2015/': 'Q09ERSBCTFVFIDIwMTXvvIgxMC8yOCwgMjnvvIk=',
+'https://tokyo.wordcamp.org/2015/': 
+'V29yZENhbXAgVG9reW8gMjAxNe+8iDEwLzMxLCAxMS8x77yJ',
+'http://sa2015.siggraph.org/jp/': 
+'U0lHR1JBUEggQVNJQSAyMDE177yIMTEvMu+9njXvvIk=',
+'https://redhatforum.jp/': 
+'UkVEIEhBVCBGT1JVTSAyMDE1IFRPS1lP77yIMTEvNO+8iQ==',
+'http://texconf15.tumblr.com/': 
+'VGVY44Om44O844K244Gu6ZuG44GEMjAxNe+8iDExLzfvvIk=',
+'http://nodefest.jp/2015/': 
+'5p2x5LqsTm9kZeWtpuWckuelrTIwMTXvvIgxMS8377yJ',
+'http://events.linuxfoundation.jp/events/enterprise-users-meeting-japan':
+ 'RW50ZXJwcmlzZSBVc2VycyBNZWV0aW5nIEphcGFuIDIwMTXvvIgxMS8577yJ',
+'http://www.openid.or.jp/summit/2015/': 
+'T3BlbklEIFN1bW1pdCBUb2t5byAyMDE177yIMTEvMTDvvIk=',
+'https://clouderaworld.tokyo/': 
+'Q2xvdWRlcmEgV29ybGQgVG9reW8gMjAxNe+8iDExLzEw77yJ',
+'http://www.event-web.net/adobelive2015/max/': 
+'QWRvYmUgTGl2ZSAyMDE1IC0gQmVzdCBvZiBNQVjvvIgxMS8xMe+8iQ==',
+'http://www.iij.ad.jp/techweek2015/?i=gihyo_tw2015': 
+'SUlKIFRlY2huaWNhbCBXRUVLIDIwMTXvvIgxMS8xMe+9njEz77yJ',
+'http://www.ricksoft.jp/seminar/s20151112.html': 
+'56ysMuW8vu+8geOAjOOCteODvOODk+OCueODrOODmeODq+OBruaomea6luWMluOAjeOAjOWvvuW/nOW3peaVsOOBruWJiua4m+OAjeOBl+OBpuOAjOmhp+Wuoua6gOi2s+W6puWQkeS4iuOAjeOCguWun+ePvuOBmeOCi+OCteODvOODk+OCueODh+OCueOCr+a0u+eUqOOBqOOBr++8iDExLzEy77yJ',
+'https://pacsec.jp/':
+ 'UGFjU2VjIDIwMTXvvIgxMS8xMSwgMTLvvIk=',
+'http://2015.rubyworld-conf.org/ja/': 
+'UnVieVdvcmxkIENvbmZlcmVuY2UgMjAxNe+8iDExLzEyLCAxM++8iQ==',
+'http://ja.avtokyo.org/avtokyo2015': 'QVZUT0tZTzIwMTXvvIgxMS8xNO+8iQ==',
+'http://www.mozilla.jp/events/devcon/2015/tokyo/': 
+'RmlyZWZveCBEZXZlbG9wZXJzIENvbmZlcmVuY2UgMjAxNSBpbiBUb2t5b++8iDExLzE177yJ',
+'https://internetweek.jp/':
+ 'SW50ZXJuZXQgV2VlayAyMDE177yIMTEvMTfvvZ4yMO+8iQ==',
+'http://www.jasa.or.jp/expo/et/': 
+'RW1iZWRkZWQgVGVjaG5vbG9neSAyMDE177yIMTEvMTjvvZ4yMO+8iQ==',
+'http://www.postgresql.jp/events/jpug-pgcon2015/': 
+'UG9zdGdyZVNRTOOCq+ODs+ODleOCoeODrOODs+OCuTIwMTXvvIgxMS8yN++8iQ==',
+'https://groonga.doorkeeper.jp/events/31482': 
+'R3Jvb25nYSBNZWF0dXAgMjAxNe+8iDExLzI577yJ',
+'http://www.ricksoft.jp/seminar/s20151204.html': 
+'44Ki44OI44Op44K344Ki44Oz5YWx5YKsIEpJUkEgN+OCouODg+ODl+ODh+ODvOODiOOCu+ODn+ODiuODvO+8iDEyLzTvvIk=',
+'https://atnd.org/events/71243':
+ 'SmFwYW4uUiAyMDE177yIMTIvNe+8iQ==',
+'http://rubykaigi.org/2015': 'UnVieUthaWdpIDIwMTXvvIgxMi8xMe+9njEz77yJ',
+'https://www.elastic.co/elasticon/tour/2015/tokyo': 
+'RWxhc3RpY3tPTn0gVG91ciAyMDE1IGluIFRva3lv77yIMTIvMTbvvIk=',
+'http://scalamatsuri.org/': 
+'U2NhbGFNYXRzdXJpIDIwMTbvvIgxLzMwLCAzMe+8iQ==',
+'http://2016.cross-party.com/': 
+'44Ko44Oz44K444OL44Ki44K144Od44O844OIQ1JPU1MyMDE277yIMi8077yJ',
+'http://webrtcconference.jp/': 
+'V2ViUlRDIENvbmZlcmVuY2UgSmFwYW4gMjAxNu+8iDIvMTYsIDE377yJ',
+'https://droidkaigi.github.io/2016/': 
+'RHJvaWRLYWlnaSAyMDE277yIMi8xOCwgMTnvvIk=',
+
+};
+for(key in array){
+  var str = $.base64.decode(array[key], 1);
+  var tmp = str.match(/^(.+?)(（.+?）)$/);
+  if(tmp){
+    html = html + '<li><a href="' + key + '" rel="external">' + tmp[1] +
+ '</a>' + tmp[2] + "</li>\n";
+  }
+}
+html = html + "</ul>";
+document.getElementById("eventInfo").innerHTML = html;
+</script>
+<script type="text/javascript" src="gihyo.jp_files/widgets.js" async="async" defer="defer"></script>
+<script type="text/javascript" src="gihyo.jp_files/sdk.js" id="facebook-jssdk" async="async" defer="defer"></script>
+<script gapi_processed="true" type="text/javascript" src="gihyo.jp_files/platform.js" async="async" defer="defer"></script>
+<script type="text/javascript" src="gihyo.jp_files/bookmark_button.js" charset="utf-8" async="async" defer="defer"></script>
+<script type="text/javascript">
+var fbc = 10;
+var twc = 10;
+function fbEventSet() {
+  if(window.FB) {
+    FB.Event.subscribe('edge.create', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+    });
+    FB.Event.subscribe('edge.remove', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'unlike', targetUrl]);
+    });
+  } else {
+    if(fbc > 0){
+      setTimeout(fbEventSet, 100);
+      fbc--;
+    }
+  }
+}
+function extractParamFromUri(uri, paramName) {
+  if (!uri) {
+    return;
+  }
+  var uri = uri.split('#')[0];
+  var parts = uri.split('?');
+  if (parts.length == 1) {
+    return;
+  }
+  var query = decodeURI(parts[1]);
+
+  paramName += '=';
+  var params = query.split('&');
+  for (var i = 0, param; param = params[i]; ++i) {
+    if (param.indexOf(paramName) === 0) {
+      return unescape(param.split('=')[1]);
+    }
+  }
+}
+function twttrEventSet() {
+  if(window.twttr) {
+    twttr.events.bind('tweet', function(event) {
+      if (event) {
+        var targetUrl;
+        if (event.target && event.target.nodeName == 'IFRAME') {
+          targetUrl = extractParamFromUri(event.target.src, 'url');
+        }
+        _gaq.push(['_trackSocial', 'twitter', 'tweet', targetUrl]);
+      }
+    });
+  } else {
+    if(twc > 0){
+      setTimeout(twttrEventSet, 100);
+      twc--;
+    }
+  }
+}
+fbEventSet();
+twttrEventSet();
+</script><iframe class="btubrjvpmcilecpcsfco" style="visibility: hidden; display: none;" src="gihyo.jp_files/container.htm"></iframe>
+
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="gihyo.jp_files/postmessageRelay.htm" id="oauth2relay1958390049" name="oauth2relay1958390049"></iframe></body><iframe src="" style="display: none;"></iframe></html>

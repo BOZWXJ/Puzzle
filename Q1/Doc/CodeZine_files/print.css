@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+
+header .ad  {
+	display:none;
+}
+nav {
+	display:none;
+}
+#shType {
+	display:none;
+}
+aside {
+display:none;
+}
+article {
+	width:auto;
+}
+
+.topSection p {
+    width: 75%;
+}
+
+article .pastRankingBlock  {
+	display:none;
+}
+
+.relatedLinkBlock, .recommendBlock, .serviceBlock {
+	display:none;
+}
+
+.seriesBlock {
+	display:none;
+}
+
+.btmAD {
+	display:none;
+}
+
+@media print {
+  a[href]:after {
+    content: ""!important;
+  }
+  abbr[title]:after {
+    content: ""!important;
+  }
+}

@@ -1,0 +1,729 @@
+@charset "utf-8";
+
+/* Desktop Layout: max of 1000px. */
+
+.container {
+  margin: 0 auto;
+  width: 1000px;
+}
+header .ad {
+  float: right;
+  margin: 15px 0 14px;
+  width: 728px;
+}
+header h1,
+header .siteLogo {
+  float: left;
+  margin: 14px 0 13px 6px;
+  width: 218px;
+}
+.mbNav {
+  display: none;
+}
+
+/* -----------------------------------------
+  Header
+----------------------------------------- */
+
+nav {
+  background: #5070B2;
+  height: 60px;
+}
+.mainNav {
+  float: left;
+  width: 785px;
+}
+   .mainNav > li {
+    float: left;
+    text-align: center;
+  }
+  .mainNav .current,
+  .mainNav .active {
+    background: #223A70;
+  }
+  /*
+  .mainNav .nav01 {width: 9%;}
+  .mainNav .nav02 {width: 10%;}
+  .mainNav .nav03 {width: 15%;}
+  .mainNav .nav04 {width: 11%;}
+  .mainNav .nav05 {width: 10.5%;}
+  .mainNav .nav06 {width: 17.5%;}
+  .mainNav .nav07 {width: 15%;}
+  .mainNav .nav08 {width: 12%;}
+  */
+   .mainNav > li > a {
+  color: #fff;
+	height: 60px;
+	padding: 20px 9px 0px;
+
+    }
+    .mainNav > li > a:hover {
+      background: #223A70;
+    }
+      .mainNav .nav07 ul {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: auto;
+      z-index: 10;
+    }
+	
+    .mainNav .nav08 ul {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: auto;
+      z-index: 10;
+    }
+	
+	.mainNav .nav08 .table {
+		display:table-cell;
+	}
+#shType {
+  background: url(/lib/img/cmn/cmn-bg-shtype.png) no-repeat center 0;
+}
+
+.mainNav .navmember {
+	display:none
+}
+
+/* -----------------------------------------
+  Search Area
+----------------------------------------- */
+
+.searchbox {
+  float: right;
+  margin-top: 17px;
+  width: 210px;
+}
+.searchword {
+  height: 26px;
+  padding-left: 25px;
+  padding-right: 55px;
+}
+.searchsubmit {
+  background: url(/lib/img/cmn/cmn-header-search.png) no-repeat;
+  border: none;
+  height: 26px;
+  overflow: hidden;
+  text-indent: 3000px;
+  white-space: nowrap;
+  width: 50px;
+}
+
+
+/* -----------------------------------------
+  Contents
+----------------------------------------- */
+
+article {
+  float: left;
+  padding: 25px 0 50px;
+  width: 670px;
+}
+#contents > section {
+  margin-bottom: 25px;
+}
+.mbBtn2 {
+  background: #eee;
+  position: relative;
+}
+.mbBtn2:before {
+  background: url(/lib/img/cmn/cmn-img.png) no-repeat -50px 0;
+  content: "";
+  display: block;
+  height: 16px;
+  left: 12px;
+  position: absolute;
+  top: 10px;
+  width: 10px;
+}
+  .mbBtn2 a {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 7px 10px 5px 30px;
+  }
+
+/* ----------Heading Style --------------- */
+
+.h201 {
+  border-bottom: 1px solid #eee;
+  border-top: 4px solid #161616;
+  font-size: 18px;
+  margin: 0 0 15px;
+  padding: 5px;
+  position: relative;
+}
+.h201:before {
+  background: #5070B2;
+  content: "";
+  display: block;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  top: -4px;
+  width: 200px;
+}
+
+
+
+
+
+
+/* ----------Contents Carousel List --------------- */
+
+.carouselBlock {
+  border: 3px solid #5070B2;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.carouselBlock .wrap {
+  border-right: 1px solid #5070B2;
+  float: left;
+}
+  .carousel {
+   overflow: hidden;
+  }
+  .carousel > li {
+    float: left;
+  }
+    .cTag {
+      background: #E95148;
+      color: #fff;
+      display: inline-block;
+      font-weight: bold;
+      margin: 0 0 5px;
+      padding: 4px 5px 2px;
+    }
+    .carousel h2 {
+      font-size: 23px;
+      line-height: 1.3;
+      margin: 0 0 5px;
+    }
+    #contents .carousel .day {
+      margin-bottom: 10px;
+    }
+    .carousel .inWrap {
+      overflow: hidden;
+    }
+      .carousel .inWrap figure {
+        float: left;
+      }
+      .carousel .inWrap p {
+        font-size: 12px;
+        line-height: 1.8;
+        margin: 0;
+        overflow: hidden;
+      }
+.carouNav {
+  float: right;
+}
+  .carouNav li {
+    position: relative;
+  }
+  .carouNav li.selected {
+    background: #5070B2;
+  }
+  .carouNav li:before {
+    content: "";
+    display: none;
+    left: 0;
+    margin: -7px 0 0 -1px;
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 0 7px 7px;
+    border-color: transparent transparent transparent #fff;
+    z-index: 90;
+  }
+  .carouNav li.selected:before {
+    display: block;
+  }
+    .carouNav li a {
+      color: #333;
+      display: block;
+      font-size: 12px;
+      outline: none;
+      position: relative;
+      text-decoration: none;
+    }
+    .carouNav li a:before {
+      background: #f3f3f3;
+      content: "";
+      display: block;
+      left: 0;
+      height: 1px;
+      position: absolute;
+      top: -10px;
+      width: 100%;
+     }
+     .carouNav li:first-child a:before,
+     .carouNav li.selected a:before {
+       display: none;
+     }
+   .carouNav li.selected a {
+      color: #fff;
+    }
+  .carouBtn {
+    display: none;
+  }
+.carouselBlock .wrap {
+  overflow: hidden;
+  width: 476px;
+}
+.carousel {
+  width: 1428px;
+}
+  .carousel > li {
+    list-style: none;
+    padding: 17px;
+    width: 476px;
+  }
+      .carousel .inWrap figure {
+        margin-right: 10px;
+        width: 200px;
+      }
+.carouNav {
+  width: 188px;
+}
+  .carouNav li {
+    list-style: none;
+    padding: 10px;
+  }
+    .carouNav li a {
+      padding: 0 10px;
+    }
+
+/* ----------NEW List --------------- */
+
+.newList {
+  letter-spacing: -.4em;
+  margin: 0 0 0 -15px;
+}
+  .newList li {
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0 0 20px 25px;
+    width: 200px;
+    vertical-align: top;
+  }
+
+/* ---------- Icon List --------------- */
+
+.iconRedArrow {
+  font-size: 85.7%;
+  margin-bottom: 15px;
+}
+
+/* ---------- to List Link  --------------- */
+
+.toList {
+  font-size: 85.7%;
+  margin: 0;
+  text-align: right;
+}
+  .toList a {
+    padding-left: 16px;
+    position: relative;
+  }
+  .toList a:before {
+    background: url(/lib/img/cmn/cmn-img.png) no-repeat -62px 0;
+    content: "";
+    display: block;
+    height: 11px;
+    left: 0;
+    margin-top: -6px;
+    position: absolute;
+    top: 50%;
+    width: 11px;
+  }
+
+/* ----------Top Gray Line --------------- */
+
+.topLine01,
+.topLine02 {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  position: relative;
+}
+.topLine01:after,
+.topLine02:after {
+  background: #f4f4f4;
+  content: "";
+  display: block;
+  left: 0;
+  height: 3px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.topLine02:after {
+  background: #fff;
+  height: 1px;
+}
+
+/* ---------- Theme Block --------------- */
+
+  .themeBlock .themeListWrap {
+    margin-left: -20px;
+  }
+    .themeBlock .themeListWrap > section {
+      margin-left: 20px;
+      width: 305px;
+    }
+
+/* ---------- Author List --------------- */
+
+  .authorList li {
+    margin: 0 10px;
+    width: 90px;
+   vertical-align: top;
+  }
+
+/* ---------- Category Top Block --------------- */
+
+.catTopList {
+  margin: 0 0 15px -20px;
+  letter-spacing: -.4em;
+  width: 690px;
+}
+  .catTopList > li {
+    border-top: 1px solid #eee;
+    display: inline-block;
+    letter-spacing: normal;
+    margin: 0 0 0 20px;
+    width: 325px;
+    vertical-align: top;
+  }
+    .catTopList li figure {
+      float: left;
+      margin-right: 10px;
+      width: 140px;
+    }
+    .catTopList li .boxWrap {
+      float: right;
+      width: 175px;
+    }
+    .catTopList li p {
+      font-size: 12px;
+      margin: 0 0 10px;
+    }
+   .catTopList > li:first-child {
+    width: 670px;
+  }
+    .catTopList li:first-child .boxWrap {
+      width: 460px;
+    }
+   .catTopList li:first-child h2 {
+      font-size: 26px;
+    }
+
+/* ---------- Category List Block --------------- */
+
+.pageing {
+  margin: 20px 10px 10px;
+}
+.pageCount {
+  float: left;
+  margin-top: 5px;
+}
+.pageNav {
+  margin: 0 auto;
+  width: 170px;
+}
+  .pageNav li {
+    float: left;
+  }
+  .pageNav li:first-child {
+    margin-right: 10px;
+  }
+      .catList p {
+        color: #333;
+        font-size: 12px;
+        font-weight: normal;
+        margin: 0 0 5px;
+      }
+
+/* ---------- Detail Utility Block --------------- */
+
+.detailBtn {
+  float: left;
+  width 260px:
+}
+
+.detailUit .socialBlock {
+  float: right;
+  margin: 10px 0 0;
+}
+
+
+.authorDetail .authorName {
+  float: left;
+}
+.authorDetail .day {
+  float: right;
+}
+  .topSection p {
+    float: left;
+    line-height: 2;
+    margin: 0;
+    width: 440px;
+	font-size:15px;
+  }
+  .topSection figure {
+    float: right;
+    width: 200px;
+  }
+  
+   .topSection.noimage p {
+    float: left;
+    line-height: 2;
+    margin: 0;
+	width:auto;
+  }
+  
+.article p {
+  line-height: 2;
+}
+.nextLink {
+  margin-bottom: 15px;
+  text-align: center;
+}
+  .nextLink a {
+    background: #5070B2;
+    color: #fff;
+    display: inline-block;
+    padding: 8px 15px 6px;
+  }
+ .manga_banner {
+	   margin-bottom: 15px;
+	   
+ }
+
+/* ---------- Tag Clip Block --------------- */
+  .tagLine ul {
+    margin: 10px;
+  }
+
+
+
+
+
+
+
+
+/* -----------------------------------------
+  Aside
+----------------------------------------- */
+
+aside {
+  float: right;
+  margin: 25px 0 50px;
+  width: 300px;
+}
+  aside section {
+    margin-bottom: 10px;
+  }
+aside .h202,
+aside .h203 {
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+/* ---------- Login Area --------------- */
+
+ aside .login {
+  background: #FFFAE6;
+  border: 1px solid  #FFEA93;
+  margin-bottom: 15px;
+  padding: 9px;
+}
+  aside .login li {
+    width: 135px;
+  }
+  .login li:first-child {
+    background-position: 0 -68px;
+    margin-right: 10px;
+  }
+    .login li a {
+      height: 40px;
+    }
+  .login .btn01 a {
+    background: url(/lib/img/cmn/cmn-btn-01.png) no-repeat;
+  }
+  .login .btn02 a {
+    background: url(/lib/img/cmn/cmn-btn-02.png) no-repeat;
+  }
+
+/* ---------- AD --------------- */
+
+ aside .asideAD {
+    margin: 0 0 15px;
+  }
+.specialList {
+  margin-top: 5px;
+}
+
+/* ---------- Popular Block --------------- */
+
+  .popularTab li,
+  .asidenewBlockTab li {
+    width: 139px;
+  }
+  .popularTab .tab01,
+  .asidenewBlockTab .tab01 {
+    margin-right: 2px;
+  }
+
+
+
+
+
+/* ---------- Pick Up Links Block --------------- */
+
+    .pickupList li figure {
+      margin-right: 10px;
+      width: 145px;
+    }
+
+
+
+
+
+
+
+
+/* -----------------------------------------
+  Footer
+----------------------------------------- */
+
+
+/* ---------- Footer Cont Block --------------- */
+
+footer .container {
+  padding: 20px 0 0;
+}
+.footTopBlock {
+  margin: 0 0 20px 10px;
+}
+.footTopLine {
+  float: left;
+  width: 670px;
+}
+.footMark {
+  float: right;
+  width: 300px;
+}
+  .footTopLine h2 {
+    margin: 0 50px 0 0;
+  }
+  .footTopLine .rss {
+    margin-right: 20px;
+  }
+.linkList {
+  margin: 0;
+  padding: 20px 10px;
+}
+  .linkList ul {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+  }
+    .linkList ul li {
+      margin: 0 0 7px;
+      padding: 0;
+    }
+
+/* ---------- Page Top Block --------------- */
+
+  footer .container {
+    position: relative;
+  }
+  footer .toTop {
+    background: url(/lib/img/cmn/cmn-img.png) no-repeat -146px -160px;
+    font-size: 12px;
+    float: right;
+    height: 31px;
+    margin-top: -51px;
+    text-align: center;
+    width: 145px;
+  }
+  footer .toTop a {
+    display: block;
+    margin-left: 17px;
+    padding: 8px 0 0;
+    position: relative;
+  }
+  footer .toTop a:before {
+    background: url(/lib/img/cmn/cmn-img.png) no-repeat -69px -21px;
+    content: "";
+    display: block;
+    height: 5px;
+    left: 10px;
+    position: absolute;
+    top: 14px;
+    width: 6px;
+   }
+
+
+
+
+
+
+/* ---------- 翔泳社追加 --------------- */
+ aside .login_after {
+  background: #FFFAE6;
+  border: 1px solid  #FFEA93;
+  margin-bottom: 15px;
+  padding: 9px;
+}
+
+.dropdown-menu {
+    left: auto;
+    right: 0;
+  top:90%;
+}
+
+/* ---------- Category Top Block  1ペイン用--------------- */
+
+.catTopList {
+  margin: 0 0 15px;
+}
+  .catTopList > li {
+    border-top: 1px solid #eee;
+    margin: 0;
+  width: 670px;
+  }
+    .catTopList li figure {
+      float: left;
+      margin-right: 2%;
+      width: 20%;
+    }
+    .catTopList li .boxWrap {
+      float: right;
+      width: 78%;
+    }
+  .catTopList > li figure img {
+    height: auto;
+    width: 100%;
+  }
+    .catTopList li p {
+      font-size: 12px;
+      margin: 0 0 10px;
+    }
+    .catTopList li:first-child h2 {
+      font-size: 26px;
+    }
+  .catTopList > li:first-child figure {
+    width: 30%;
+  }
+    .catTopList li:first-child .boxWrap {
+      width: 68%;
+    }
+
+
+

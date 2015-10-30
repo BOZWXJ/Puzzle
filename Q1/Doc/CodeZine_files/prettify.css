@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* Pretty printing styles. Used with prettify.js. */
+
+article pre.prettyprint .str { color: #080; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .kwd { color: #008; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .com { color: #800; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .typ { color: #606; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .lit { color: #066; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .pun { color: #660; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .pln { color: #000; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .tag { color: #008; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .atn { color: #606; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .atv { color: #080; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint .dec { color: #606; font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace; }
+.article pre.prettyprint {
+	margin: 0em 0em 0em 0em; 
+	padding: 10px 10px 10px 10px;
+	background-color: #FFF7D6;
+	font-family: "ＭＳ ゴシック", "Osaka－等幅", Monospace;
+	font-size: 13px;
+	letter-spacing: 0px;
+	line-height: 130%;
+	overflow: auto;
+	overflow-x: auto;
+	overflow-y: auto;
+}
+
+@media print {
+  .str { color: #060; }
+  .kwd { color: #006; font-weight: bold; }
+  .com { color: #600; font-style: italic; }
+  .typ { color: #404; font-weight: bold; }
+  .lit { color: #044; }
+  .pun { color: #440; }
+  .pln { color: #000; }
+  .tag { color: #006; font-weight: bold; }
+  .atn { color: #404; }
+  .atv { color: #060; }
+}
