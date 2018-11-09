@@ -20,7 +20,7 @@ namespace Frog
 
 		public void LoadFile()
 		{
-			string path = "NAZO.txt";
+			string path = "doc\\NAZO.txt";
 
 			string[] lines = File.ReadAllLines(path);
 			int num = 1, x = 0, y = 0;

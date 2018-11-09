@@ -7,15 +7,17 @@ namespace scissors
 {
 	static class Program
 	{
-		/// <summary>
-		/// アプリケーションのメイン エントリ ポイントです。
-		/// </summary>
 		[STAThread]
 		static void Main()
 		{
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
-		}
-	}
+            int x = 2, y = 1, tmp;
+            for (int i = 0; i < 40; i++)
+            {
+                tmp = x;
+                x = x + y;
+                y = tmp;
+            }
+            System.Diagnostics.Debug.WriteLine(string.Format("x={0},y={1}", x, y));
+        }
+    }
 }

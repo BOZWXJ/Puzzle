@@ -26,7 +26,7 @@ namespace Maze
 		private void button1_Click(object sender, EventArgs e)
 		{
 			// 読み込み
-			string[] lines = File.ReadAllLines("Maze.txt");
+			string[] lines = File.ReadAllLines("doc\\Maze.txt");
 			for (int i = 0; i < lines.Length; i++) {
 				xMax = xMax < lines[i].Length ? lines[i].Length : xMax;
 			}
@@ -81,11 +81,11 @@ namespace Maze
 				}
 			}
 			while (maze[r1.x, r1.y] == " ") {
-				maze[r1.x, r1.y] = "$";
+				maze[r1.x, r1.y] = ".";
 				RouteCheck(r1);
 			}
 			while (maze[r2.x, r2.y] == " ") {
-				maze[r2.x, r2.y] = "$";
+				maze[r2.x, r2.y] = ".";
 				RouteCheck(r2);
 			}
 			DateTime goalTime = DateTime.Now;

@@ -17,7 +17,7 @@ namespace Q1
 							int total = gohyaku * 500 + hyaku * 100 + gojyuu * 50 + jyuu * 10;
 							if (total == 1000 && gohyaku + hyaku + gojyuu + jyuu <= 15) {
 								count++;
-								Console.WriteLine(string.Format("{0,2}:500*{1,2}+100*{2,2}+50*{3,2}+10*{4,2}", count, gohyaku, hyaku, gojyuu, jyuu));
+								Console.WriteLine(string.Format("{0,2} : 500*{1,2} + 100*{2,2} + 50*{3,2} + 10*{4,2} = 1000", count, gohyaku, hyaku, gojyuu, jyuu));
 							}
 						}
 					}

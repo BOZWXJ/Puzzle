@@ -7,7 +7,7 @@ namespace AtCoder
 {
 	public class Program
 	{
-		// ABC104-C ok
+		// ABC104-C ng
 		static void Main(string[] args)
 		{
 			string[] vs = Console.ReadLine().Split();
@@ -23,52 +23,38 @@ namespace AtCoder
 				bonus[i] = int.Parse(vs[1]);
 			}
 
-			int answer = int.MaxValue;
+			HashSet<string> hash = new HashSet<string>();
 			Queue<Item> items = new Queue<Item>();
-			HashSet<string> hashSet = new HashSet<string>();
 			items.Enqueue(new Item(D));
-			while (items.Count > 0) {
-				Item item = items.Dequeue();
 
-				// debug: 
-				//Console.WriteLine(item.Answer + " :{" + item.ToString() + "} " + item.Point);
-
-				if (item.Point >= G) {
-					answer = Math.Min(answer, item.Answer);
-				} else {
-					for (int i = D - 1; i >= 0; i--) {
-						if (item.Count[i] == 0) {
-							int k = (G - item.Point) / basic[i] + ((G - item.Point) % basic[i] > 0 ? 1 : 0);
-							if (k < count[i]) {
-
-								// debug:
-								//Item o = new Item(item);
-								//o.Answer += k;
-								//o.Count[i] = k;
-								//o.Point += basic[i] * k;
-								//Console.WriteLine(o.Answer + " :{" + o.ToString() + "} " + o.Point + "*");
-
-								answer = Math.Min(answer, item.Answer + k);
-							}
-							break;
-						}
-					}
-				}
-
+			while (true) {
+				Item tmp = items.Dequeue();
 				for (int i = 0; i < D; i++) {
-					if (item.Count[i] == 0) {
-						Item tmp = new Item(item);
-						tmp.Answer += count[i];
-						tmp.Count[i] = count[i];
-						tmp.Point += basic[i] * count[i] + bonus[i];
-						if (!hashSet.Contains(tmp.ToString())) {
-							items.Enqueue(tmp);
-							hashSet.Add(tmp.ToString());
-						}
+					if (tmp.Count[i] == count[i]) {
+						continue;
+					}
+
+					Item item = new Item(tmp);
+					item.Answer++;
+					item.Count[i] += 1;
+					item.Point += basic[i];
+					if (item.Count[i] == count[i]) {
+						item.Point += bonus[i];
+					}
+					string s = item.ToString();
+
+					// debug
+					Console.WriteLine(item.Answer + " :{" + item.ToString() + "} " + item.Point);
+
+					if (item.Point >= G) {
+						Console.WriteLine(item.Answer);
+						return;
+					} else if (!hash.Contains(s)) {
+						items.Enqueue(item);
+						hash.Add(s);
 					}
 				}
 			}
-			Console.WriteLine(answer);
 		}
 	}
 
@@ -92,12 +78,11 @@ namespace AtCoder
 
 		public override string ToString()
 		{
-			return string.Join(",", Count.Select(p => p.ToString("D3")));
+			return string.Join("", Count.Select(p=>p.ToString("D3")));
 		}
 	}
 
 }
-
 /*
 2 400
 3 500
