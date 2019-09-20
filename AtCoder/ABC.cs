@@ -8,7 +8,7 @@ namespace AtCoder
 {
 	public class Program
 	{
-		static long mod = 1000000007;
+		static long mod = 1000000007;   // 10^9 + 7
 
 		static void Main(string[] args)
 		{
@@ -17,7 +17,7 @@ namespace AtCoder
 			int M = vs[1];
 			int[] a = Console.ReadLine().Split().Select(int.Parse).ToArray();
 
-			PriorityQueue<int> queue = new AtCoder.PriorityQueue<int>(true);
+			PriorityQueue<int> queue = new PriorityQueue<int>(true);
 			foreach (int item in a) {
 				queue.Enqueue(item);
 			}
@@ -31,7 +31,7 @@ namespace AtCoder
 			//System.Diagnostics.Debug.WriteLine(queue);
 
 			long ans = 0;
-			foreach (var item in queue) {
+			foreach (int item in queue) {
 				ans += item;
 			}
 			Console.WriteLine(ans);
@@ -39,7 +39,7 @@ namespace AtCoder
 		}
 	}
 
-	#region PriorityQueue
+	#region 優先度付きキュー
 
 	public class PriorityQueue<T> where T : IComparable
 	{
@@ -53,7 +53,7 @@ namespace AtCoder
 		{
 			_Heap = new List<T>();
 			if (!reverse) {
-				_Compare = (T x, T y) => Comparer<T>.Default.Compare(x, y);
+				_Compare = Comparer<T>.Default.Compare;
 			} else {
 				_Compare = (T x, T y) => Comparer<T>.Default.Compare(y, x);
 			}
@@ -76,10 +76,10 @@ namespace AtCoder
 
 		public T Dequeue()
 		{
-			var ret = _Heap[0];
 			int size = _Heap.Count - 1;
-			var x = _Heap[size];
-			var i = 0;
+			T ret = _Heap[0];
+			T x = _Heap[size];
+			int i = 0;
 			while (i * 2 + 1 < size) {
 				var a = i * 2 + 1;
 				var b = i * 2 + 2;
