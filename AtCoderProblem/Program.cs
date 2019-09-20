@@ -10,30 +10,31 @@ namespace AtCoderProblem
 {
 	class Program
 	{
-		[STAThreadAttribute]
+		[STAThread]
 		static void Main(string[] args)
 		{
 			StringBuilder sb = new StringBuilder();
 			Random rand = new Random();
 
-			int N = 500;    //     500
-			int M = 200000; // 20,0000
-			int Q = 100000; // 10,0000
-			sb.AppendLine(N + " " + M + " " + Q);
-			for (int i = 0; i < M; i++) {
-				int a = rand.Next(1, N + 1);
-				int b = rand.Next(a, N + 1);
-				sb.AppendLine(a + " " + b);
+			int N = 100;
+
+			sb.AppendLine($"{N} 50");
+
+			for (int i = 0; i < N; i++) {
+				double tmp = rand.NextDouble();
+				while (tmp == 0) {
+					tmp = rand.NextDouble();
+				}
+				//sb.Append($"{tmp:0.##} ");
+				sb.Append($"5 ");
 			}
-			for (int i = 0; i < Q; i++) {
-				int a = rand.Next(1, N + 1);
-				int b = rand.Next(a, N + 1);
-				sb.AppendLine(a + " " + b);
-			}
+			sb.Remove(sb.Length-1, 1);
+			sb.AppendLine();
+
 			// 問題文出力
 			string txt = sb.ToString();
-			// Console.WriteLine(txt);
-			File.WriteAllText(@"..\..\..\AtCoder\Problem.txt", txt, Encoding.ASCII);
+			Console.WriteLine(txt);
+			File.AppendAllText(@"..\..\..\AtCoder\Problem.txt", txt, Encoding.ASCII);
 		}
 	}
 }
