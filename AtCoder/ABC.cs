@@ -1,46 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace AtCoder
 {
+	// ABC138D X
 	public class Program
 	{
-		static long mod = 1000000007;   // 10^9 + 7
-
 		static void Main(string[] args)
 		{
+			Console.SetOut(new StreamWriter(Console.OpenStandardOutput()) { AutoFlush = false });
+
+
 			int[] vs = Console.ReadLine().Split().Select(int.Parse).ToArray();
 			int N = vs[0];
-			int M = vs[1];
-			int[] a = Console.ReadLine().Split().Select(int.Parse).ToArray();
+			int Q = vs[1];
 
-			PriorityQueue<int> queue = new PriorityQueue<int>(true);
-			foreach (int item in a) {
-				queue.Enqueue(item);
+			MultiMap<int, int> ki = new MultiMap<int, int>();
+			for (int i = 0; i < N - 1; i++) {
+				vs = Console.ReadLine().Split().Select(int.Parse).ToArray();
+				ki.Add(vs[0] - 1, vs[1] - 1);
 			}
-			//System.Diagnostics.Debug.WriteLine(queue);
 
-			for (int i = 0; i < M; i++) {
-				int item = queue.Dequeue();
-				item /= 2;
-				queue.Enqueue(item);
+			long[] ans = new long[N];
+			for (int i = 0; i < Q; i++) {
+				vs = Console.ReadLine().Split().Select(int.Parse).ToArray();
+				ans[vs[0] - 1] += vs[1];
 			}
-			//System.Diagnostics.Debug.WriteLine(queue);
 
-			long ans = 0;
-			foreach (int item in queue) {
-				ans += item;
+			Queue<int> queue = new Queue<int>();
+			queue.Enqueue(0);
+			while (queue.Count > 0) {
+				int no = queue.Dequeue();
+				if (ki.ContainsKey(no)) {
+					foreach (var i in ki[no]) {
+						ans[i] += ans[no];
+						queue.Enqueue(i);
+					}
+				}
 			}
-			Console.WriteLine(ans);
+			Console.WriteLine(string.Join(" ", ans));
 
+
+			Console.Out.Flush();
 		}
 	}
+}
 
-	#region 優先度付きキュー
+#region MultiMap<TKey, TValue>
 
+namespace AtCoder
+{
+	public class MultiMap<TKey, TValue> : Dictionary<TKey, List<TValue>>
+	{
+		public void Add(TKey key, TValue value)
+		{
+			if (!ContainsKey(key)) {
+				Add(key, new List<TValue>());
+			}
+			this[key].Add(value);
+		}
+		private new void Add(TKey key, List<TValue> values)
+		{
+			base.Add(key, values);
+		}
+	}
+}
+
+#endregion
+
+#region PriorityQueue<T> 優先度付きキュー
+
+namespace AtCoder
+{
 	public class PriorityQueue<T> where T : IComparable
 	{
 		private readonly List<T> _Heap;
@@ -117,7 +152,25 @@ namespace AtCoder
 			return string.Join(" ", _Heap);
 		}
 	}
-
-	#endregion
-
 }
+
+#endregion
+
+#region MultiSet<T>
+
+namespace AtCoder
+{
+	public class MultiSet<T>
+	{
+		private Dictionary<T, int> _MultiSet;
+
+		public MultiSet()
+		{
+			_MultiSet = new Dictionary<T, int>();
+		}
+
+	}
+}
+
+#endregion
+
