@@ -46,21 +46,21 @@ namespace PuzzleSolver.Models
 		static readonly Dictionary<int, (int parent, char[,] board, string msg)> stateDict = new();
 		static readonly HashSet<string> stateHash = new();
 
-		public static string Solver(ref string ProblemText, CancellationToken token)
+		public static string Solver(ref string problem, CancellationToken token)
 		{
-			if (string.IsNullOrWhiteSpace(ProblemText)) {
-				ProblemText = "#######\n#aabcd#\n#ee   #\n#ee   #\n#iijkl#\n#######\n#######\n#     #\n#   ee#\n#   ee#\n#     #\n#######\n";
-				ProblemText = "aabcd\nee   \nee   \niijkl\n\n     \n   ee\n   ee\n     \n";
-				ProblemText = "#######\n#aabcd#\n#eefg #\n#eefh #\n#iijkl#\n#######\n#######\n#     #\n#   ee#\n#   ee#\n#     #\n#######\n";
-				ProblemText = "aabcd\neefg \neefh \niijkl\n\n     \n   ee\n   ee\n     \n";
-				ProblemText = "#######\n#aabcd#\n#eefg #\n#eefh #\n#iijkl#\n#######\n#######\n#     #\n#   ee#\n#   ee#\n#     #\n#######\n";
-				ProblemText = "BAAD\nBAAD\nCFFE\nCHIE\nG  J\n\n    \n    \n    \n AA \n AA \n";
-				ProblemText = "######\n#BAAD#\n#BAAD#\n#CFFE#\n#CHIE#\n#G  J#\n######\n\n######\n#    #\n#    #\n#    #\n# AA #\n# AA #\n######\n";
+			if (string.IsNullOrWhiteSpace(problem)) {
+				problem = "#######\n#AABCD#\n#EE   #\n#EE   #\n#IIJKL#\n#######\n#######\n#     #\n#   EE#\n#   EE#\n#     #\n#######\n";
+				problem = "AABCD\nEE   \nEE   \nIIJKL\n\n     \n   EE\n   EE\n     \n";
+				problem = "#######\n#AABCD#\n#EEFG #\n#EEFH #\n#IIJKL#\n#######\n#######\n#     #\n#   EE#\n#   EE#\n#     #\n#######\n";
+				problem = "AABCD\nEEFG \nEEFH \nIIJKL\n\n     \n   EE\n   EE\n     \n";
+				problem = "#######\n#AABCD#\n#EEFG #\n#EEFH #\n#IIJKL#\n#######\n#######\n#     #\n#   EE#\n#   EE#\n#     #\n#######\n";
+				problem = "BAAD\nBAAD\nCFFE\nCHIE\nG  J\n\n    \n    \n    \n AA \n AA \n";
+				problem = "******\n*1003*\n*1003*\n*2554*\n*2674*\n*8  9*\n******\n\n******\n*    *\n*    *\n*    *\n* 00 *\n* 00 *\n******\n";
 			}
 
 			// 問題文
 			try {
-				string[] lines = ProblemText.Split("\n", StringSplitOptions.RemoveEmptyEntries);
+				string[] lines = problem.Split("\n", StringSplitOptions.RemoveEmptyEntries);
 				if (lines.Length % 2 != 0) {
 					return "Error";
 				}
@@ -78,28 +78,25 @@ namespace PuzzleSolver.Models
 			stateHash.Clear();
 			int ans = Search(token);
 			// 結果
-			string AnswerText = "";
-			if (ans > 0) {
-				List<int> ansList = new();
-				ansList.Add(ans);
-				while (true) {
-					if (0 != stateDict[ans].parent) {
-						ansList.Add(stateDict[ans].parent);
-						ans = stateDict[ans].parent;
-					} else {
-						break;
-					}
-				}
-				ansList.Reverse();
-				System.Diagnostics.Debug.WriteLine($"{ansList.Count}:{string.Join(",", ansList)}");
-				AnswerText = $"{ansList.Count}\n";
-				foreach (var i in ansList) {
-					AnswerText += $"{stateDict[i].msg}\n{PrintBoard(stateDict[i].board)}";
-				}
-			} else {
-				AnswerText = "No";
+			if (ans <= 0) {
+				return "No";
 			}
-			return AnswerText;
+			List<int> ansList = new();
+			ansList.Add(ans);
+			while (true) {
+				if (0 != stateDict[ans].parent) {
+					ansList.Add(stateDict[ans].parent);
+					ans = stateDict[ans].parent;
+				} else {
+					break;
+				}
+			}
+			ansList.Reverse();
+			string answer = $"{ansList.Count}\n";
+			foreach (var i in ansList) {
+				answer += $"{stateDict[i].msg}\n{PrintBoard(stateDict[i].board)}";
+			}
+			return answer;
 		}
 
 		// 文字列を読み込む
@@ -125,7 +122,7 @@ namespace PuzzleSolver.Models
 			// goal に含まれる、同一形状でも区別する
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
-					if (goal[i, j] != ' ' && goal[i, j] != '#') {
+					if (goal[i, j].IsPiece()) {
 						if (!pieces.ContainsKey(goal[i, j])) {
 							// 無し
 							pieces.Add(goal[i, j], new Piece(goal[i, j], i, j));
@@ -140,7 +137,7 @@ namespace PuzzleSolver.Models
 			Dictionary<char, Piece> shape = new();
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
-					if (start[i, j] != ' ' && start[i, j] != '#' && !pieces.ContainsKey(start[i, j])) {
+					if (start[i, j].IsPiece() && !pieces.ContainsKey(start[i, j])) {
 						if (!shape.TryAdd(start[i, j], new Piece(start[i, j], i, j))) {
 							shape[start[i, j]].AddOffset(i, j);
 						}
@@ -159,8 +156,6 @@ namespace PuzzleSolver.Models
 				pieces.Add(key, piece);
 			}
 		}
-
-		enum Direction { Up, Down, Right, Left }
 
 		// 探索
 		static int Search(CancellationToken token)
@@ -182,7 +177,7 @@ namespace PuzzleSolver.Models
 				}
 				for (int i = 0; i < height; i++) {
 					for (int j = 0; j < width; j++) {
-						if ((stateDict[id].board[i, j] != ' ' && stateDict[id].board[i, j] != '#') && !pieces[stateDict[id].board[i, j]].check) {
+						if (stateDict[id].board[i, j].IsPiece() && !pieces[stateDict[id].board[i, j]].check) {
 							pieces[stateDict[id].board[i, j]].location = (i, j);
 							pieces[stateDict[id].board[i, j]].check = true;
 						}
@@ -215,7 +210,7 @@ namespace PuzzleSolver.Models
 						queue.Enqueue((nextId, lv));
 						stateDict.Add(nextId, (id, next, $"{lv}:{piece.name} {d}"));
 						stateHash.Add(nextHash);
-						//System.Diagnostics.Debug.WriteLine($"{id}->{nextId} [label=\"{lv}:{piece.name}{piece.location} {d}\"]\n{PrintBoard(next)}");
+						//System.Diagnostics.Debug.WriteLine($"{id}->{nextId} [label=\"{lv}:{piece.name}{piece.location} {d}\"]");
 						int result = Saiki(queue, nextId, lv, piece, d, token);
 						if (result >= 0) {
 							return result;
@@ -294,7 +289,7 @@ namespace PuzzleSolver.Models
 		{
 			for (int i = 0; i < height; i++) {
 				for (int j = 0; j < width; j++) {
-					if (goal[i, j] != ' ' && goal[i, j] != state[i, j]) {
+					if (goal[i, j].IsPiece() && goal[i, j] != state[i, j]) {
 						return false;
 					}
 				}
@@ -317,4 +312,13 @@ namespace PuzzleSolver.Models
 		}
 
 	}
+
+	public static class CharExt
+	{
+		public static bool IsPiece(this char c)
+		{
+			return (('0' <= c && c <= '9') || ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z'));
+		}
+	}
+
 }

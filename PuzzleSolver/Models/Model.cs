@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace PuzzleSolver.Models
 {
+	enum Direction { Up, Down, Right, Left }
+
 	public class Model : NotificationObject
 	{
 		public ObservableCollection<string> SolverList { get; } = new ObservableCollection<string>();
@@ -19,8 +21,12 @@ namespace PuzzleSolver.Models
 		public Model()
 		{
 			SolverList.Add("Sudoku");
+			// カックロ
 			SolverList.Add("Slide");
 			SolverList.Add("Pluszle");
+			// nQueen
+			SolverList.Add("Frog");
+			// Hanoi
 			SolveBusy.Value = false;
 		}
 
@@ -49,10 +55,16 @@ namespace PuzzleSolver.Models
 				case "Pluszle":
 					answer = Pluszle.Solver(ref problem);
 					break;
+				case "Frog":
+					answer = Frog.Solver(ref problem, cts.Token);
+					break;
 				}
 			} catch (OperationCanceledException) {
 				answer = "Cancel";
-			} finally { cts.Dispose(); }
+			} finally {
+				cts.Dispose();
+				cts = null;
+			}
 			ProblemText.Value = problem;
 			AnswerText.Value = answer;
 			SolveBusy.Value = false;

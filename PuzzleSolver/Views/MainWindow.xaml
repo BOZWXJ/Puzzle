@@ -85,6 +85,7 @@
                 Margin="6"
                 HorizontalAlignment="Right"
                 Command="{Binding Solve}" />
+
         <StatusBar Grid.Row="3"
                    Grid.ColumnSpan="2"
                    Margin="-6,0,-6,-6"

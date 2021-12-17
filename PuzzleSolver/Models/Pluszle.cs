@@ -12,17 +12,17 @@ namespace PuzzleSolver.Models
 		static int[] rowSum;
 		static int[] colSum;
 		static StringBuilder sb = new StringBuilder();
-		public static string Solver(ref string ProblemText)
+		public static string Solver(ref string problem)
 		{
-			if (string.IsNullOrWhiteSpace(ProblemText)) {
-				ProblemText = "6 8 3 6 1 4 7 8 13\n9 7 6 1 9 2 4 9 22\n1 3 8 3 2 5 5 9 18\n2 8 8 4 8 3 5 7 37\n9 3 8 3 1 8 2 3 17\n9 1 7 2 8 8 6 5 16\n9 8 5 4 4 3 2 7 9\n6 8 8 5 6 5 2 6 25\n30 20 16 11 7 15 14 44\n";
+			if (string.IsNullOrWhiteSpace(problem)) {
+				problem = "6 8 3 6 1 4 7 8 13\n9 7 6 1 9 2 4 9 22\n1 3 8 3 2 5 5 9 18\n2 8 8 4 8 3 5 7 37\n9 3 8 3 1 8 2 3 17\n9 1 7 2 8 8 6 5 16\n9 8 5 4 4 3 2 7 9\n6 8 8 5 6 5 2 6 25\n30 20 16 11 7 15 14 44\n";
 			}
 
 			int row;
 			int col;
 			// 問題文
 			try {
-				string[] lines = ProblemText.Split("\n", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+				string[] lines = problem.Split("\n", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 				string[][] cells = new string[lines.Length][];
 				List<string> list = new List<string>();
 				foreach (var (str, i) in lines.Select((str, i) => (str, i))) {
