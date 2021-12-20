@@ -49,18 +49,18 @@ namespace PuzzleSolver.Models
 		public static string Solver(ref string problem, CancellationToken token)
 		{
 			if (string.IsNullOrWhiteSpace(problem)) {
-				problem = "#######\n#AABCD#\n#EE   #\n#EE   #\n#IIJKL#\n#######\n#######\n#     #\n#   EE#\n#   EE#\n#     #\n#######\n";
-				problem = "AABCD\nEE   \nEE   \nIIJKL\n\n     \n   EE\n   EE\n     \n";
-				problem = "#######\n#AABCD#\n#EEFG #\n#EEFH #\n#IIJKL#\n#######\n#######\n#     #\n#   EE#\n#   EE#\n#     #\n#######\n";
-				problem = "AABCD\nEEFG \nEEFH \nIIJKL\n\n     \n   EE\n   EE\n     \n";
-				problem = "#######\n#AABCD#\n#EEFG #\n#EEFH #\n#IIJKL#\n#######\n#######\n#     #\n#   EE#\n#   EE#\n#     #\n#######\n";
-				problem = "BAAD\nBAAD\nCFFE\nCHIE\nG  J\n\n    \n    \n    \n AA \n AA \n";
-				problem = "******\n*1003*\n*1003*\n*2554*\n*2674*\n*8  9*\n******\n\n******\n*    *\n*    *\n*    *\n* 00 *\n* 00 *\n******\n";
+				problem = "#######\r\n#AABCD#\r\n#EE   #\r\n#EE   #\r\n#IIJKL#\r\n#######\r\n#######\r\n#     #\r\n#   EE#\r\n#   EE#\r\n#     #\r\n#######\r\n";
+				problem = "AABCD\r\nEE   \r\nEE   \r\nIIJKL\r\n\r\n     \r\n   EE\r\n   EE\r\n     \r\n";
+				problem = "#######\r\n#AABCD#\r\n#EEFG #\r\n#EEFH #\r\n#IIJKL#\r\n#######\r\n#######\r\n#     #\r\n#   EE#\r\n#   EE#\r\n#     #\r\n#######\r\n";
+				problem = "AABCD\r\nEEFG \r\nEEFH \r\nIIJKL\r\n\r\n     \r\n   EE\r\n   EE\r\n     \r\n";
+				problem = "#######\r\n#AABCD#\r\n#EEFG #\r\n#EEFH #\r\n#IIJKL#\r\n#######\r\n#######\r\n#     #\r\n#   EE#\r\n#   EE#\r\n#     #\r\n#######\r\n";
+				problem = "BAAD\r\nBAAD\r\nCFFE\r\nCHIE\r\nG  J\r\n\r\n    \r\n    \r\n    \r\n AA \r\n AA \r\n";
+				problem = "******\r\n*1003*\r\n*1003*\r\n*2554*\r\n*2674*\r\n*8  9*\r\n******\r\n\r\n******\r\n*    *\r\n*    *\r\n*    *\r\n* 00 *\r\n* 00 *\r\n******\r\n";
 			}
 
 			// 問題文
 			try {
-				string[] lines = problem.Split("\n", StringSplitOptions.RemoveEmptyEntries);
+				string[] lines = problem.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 				if (lines.Length % 2 != 0) {
 					return "Error";
 				}
@@ -297,7 +297,7 @@ namespace PuzzleSolver.Models
 			return true;
 		}
 
-		static StringBuilder sb = new();
+		private static readonly StringBuilder sb = new();
 		private static string PrintBoard(char[,] data)
 		{
 			sb.Clear();

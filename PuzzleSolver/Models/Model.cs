@@ -23,15 +23,15 @@ namespace PuzzleSolver.Models
 			SolverList.Add("Sudoku");
 			// カックロ
 			SolverList.Add("Slide");
-			SolverList.Add("Pluszle");
+			SolverList.Add("Peg");
+			SolverList.Add("Knight");
 			// nQueen
+			SolverList.Add("Pluszle");
 			SolverList.Add("Frog");
-			// Hanoi
 			SolveBusy.Value = false;
 		}
 
 		public ReactiveProperty<bool> SolveBusy { get; } = new ReactiveProperty<bool>();
-		Task<string> task;
 		CancellationTokenSource cts = null;
 		public async void Solve()
 		{
@@ -45,18 +45,24 @@ namespace PuzzleSolver.Models
 			try {
 				switch (Solver.Value) {
 				case "Sudoku":
-					task = Task.Run(() => Sudoku.Solver(ref problem, cts.Token), cts.Token);
-					answer = await task;
+					answer = await Task.Run(() => Sudoku.Solver(ref problem, cts.Token), cts.Token);
 					break;
 				case "Slide":
-					task = Task.Run(() => Slide.Solver(ref problem, cts.Token), cts.Token);
-					answer = await task;
+					answer = await Task.Run(() => Slide.Solver(ref problem, cts.Token), cts.Token);
+					break;
+				case "Peg":
+					answer = await Task.Run(() => Peg.Solver(ref problem, cts.Token), cts.Token);
+					break;
+				case "Knight":
+					answer = await Task.Run(() => Knight.Solver(ref problem, cts.Token), cts.Token);
 					break;
 				case "Pluszle":
 					answer = Pluszle.Solver(ref problem);
 					break;
 				case "Frog":
 					answer = Frog.Solver(ref problem, cts.Token);
+					break;
+				default:
 					break;
 				}
 			} catch (OperationCanceledException) {
