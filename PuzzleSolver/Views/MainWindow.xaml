@@ -79,7 +79,7 @@
                   ItemsSource="{Binding SolverList}"
                   SelectedIndex="0"
                   Text="{Binding Solver.Value}" />
-        <Button Content="回答"
+        <Button Content="探索"
                 Grid.Row="2"
                 Grid.Column="1"
                 Margin="6"

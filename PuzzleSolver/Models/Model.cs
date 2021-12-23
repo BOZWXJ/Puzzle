@@ -1,6 +1,7 @@
 ﻿using Livet;
 using Reactive.Bindings;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace PuzzleSolver.Models
 			SolverList.Add("Slide");
 			SolverList.Add("Peg");
 			SolverList.Add("Knight");
-			// nQueen
+			SolverList.Add("Queen");
 			SolverList.Add("Pluszle");
 			SolverList.Add("Frog");
 			SolveBusy.Value = false;
@@ -55,6 +56,9 @@ namespace PuzzleSolver.Models
 					break;
 				case "Knight":
 					answer = await Task.Run(() => Knight.Solver(ref problem, cts.Token), cts.Token);
+					break;
+				case "Queen":
+					answer = await Task.Run(() => Queen.Solver(ref problem, cts.Token), cts.Token);
 					break;
 				case "Pluszle":
 					answer = Pluszle.Solver(ref problem);
